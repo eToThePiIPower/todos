@@ -13,6 +13,14 @@ Clone the repository:
 git clone https://github.com/eToThePiIPower/todos
 ```
 
+Create the Postgres user and databases
+
+```ruby
+createuser todos -s
+rake db:create
+rake db:migrate
+```
+
 Start the server locally:
 
 ```ruby
