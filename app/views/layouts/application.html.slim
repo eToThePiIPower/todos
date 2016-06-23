@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title
+      | Todos
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    header
+      = render 'layouts/navbar'
+    main[role="main"]
+      = render 'layouts/messages'
+      = yield

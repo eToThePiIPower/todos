@@ -1,0 +1,8 @@
+= form_for @todo_list do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', placeholder: 'Name'
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control', placeholder: 'Description'
+  = f.submit class: 'btn btn-primary form-control'
