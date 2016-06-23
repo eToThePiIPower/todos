@@ -1,8 +1,11 @@
-<table>
+<div class="container">
+<table class="table table-striped">
   <thead>
-    <td>Name</td>
-    <td>Description</td>
-    <td>Actions</td>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
   </thead>
   <tbody>
   <% @todo_lists.each do |list| %>
@@ -10,10 +13,13 @@
       <td><%= link_to(list.name, list) %></td>
       <td><%= list.description %></td>
       <td>
-        <%= link_to('Edit', edit_todo_list_url(list)) %>
-        <%= link_to('Delete', todo_list_url(list), method: :delete) %>
+        <div class="btn-group">
+          <%= link_to('Edit', edit_todo_list_url(list), class: 'btn btn-default btn-sm') %>
+          <%= link_to('Delete', todo_list_url(list), method: :delete, class: 'btn btn-danger btn-sm') %>
+        </div>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+</div> <!-- .container -->
