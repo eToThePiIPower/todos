@@ -22,6 +22,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.4.2'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'slim_lint'
 end
 
 group :development do
