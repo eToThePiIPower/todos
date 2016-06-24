@@ -1,0 +1,14 @@
+@import "bootstrap-sprockets";
+@import "bootswatch/yeti/variables";
+@import "bootstrap";
+@import "bootswatch/yeti/bootswatch";
+@import "font-awesome";
+
+.jumbotron {
+  background-color: $brand-primary;
+  color: $body-bg;
+}
+
+.field_with_errors {
+  @extend .has-error
+}

@@ -1,0 +1,18 @@
+.container
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Description
+        th Action
+      tbody
+        - @todo_lists.each do |list|
+          tr[data-href=todo_list_path(list)]
+            td
+              = link_to(list.name, list)
+            td
+              = list.description
+            td.actions
+              .btn-group
+                = link_to('Edit', edit_todo_list_url(list), class: 'btn btn-default btn-xs')
+                = link_to('Delete', todo_list_url(list), method: :delete, class: 'btn btn-danger btn-xs')

@@ -1,0 +1,10 @@
+- if @todo_list.errors.any?
+  .alert.alert-dismissable.alert-danger#errors-explanation
+    button.close[type="button" data-dismiss="alert" aria-hidden="true"]
+      | &times
+    strong
+      = pluralize @todo_list.errors.count, 'error'
+      |  prohibited this todo list from being saved.
+    ul
+      - @todo_list.errors.each do |field, msg|
+        li = "#{field.capitalize} #{msg}"
