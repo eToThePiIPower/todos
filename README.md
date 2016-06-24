@@ -3,7 +3,7 @@
 A not-so-basic todos app
 
 **Todos** aims to be a free and open-source todos app supporting ideas from
-*Getting Things Done* and other productivity methodologies.
+_Getting Things Done_ and other productivity methodologies.
 
 ## Installation
 
@@ -31,11 +31,45 @@ Or deploy to Heroku or your Rails host of choice
 
 ## Usage
 
-(TODO: Describe basic usage)
+Push to Heroku or your host of choice
+
+TODO: More deatil
 
 ## Contributing
 
-Please ensure you write specs for your code, and ensure everything passes both
-rspec and rubocop before submitting a pull request
+Included in the bundle are several linters, but we also need
+ESLint for dev which gets installed via npm.
 
-(TODO: Go into more detail)
+```sh
+npm install
+```
+
+You can run the linters individually or in bulk via rake, which
+has the added benefit of providing consistent success/failure
+messages with color coding :D
+
+```sh
+rake lint:rubocop
+rake lint:slim
+rake lint:eslint
+rake lint:all
+rake lint
+```
+
+Specs can be run the standard way
+
+```sh
+rake spec
+```
+
+## Authors
+
+*   Charles Beynon &lt;@[eToThePiIPower][cb]>
+
+## License
+
+[MIT][license]
+
+[cb]: https://github.com/eToThePiIPower "Charles Beynon"
+
+[license]: LICENSE.txt

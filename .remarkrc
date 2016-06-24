@@ -1,0 +1,13 @@
+{
+  "output": false,
+  "plugins": {
+    "remark-lint": {
+      "list-item-spacing": false,
+      "no-file-name-irregular-characters": false
+    }
+  },
+  "settings": {
+    "bullet": "*"
+  }
+}
+

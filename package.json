@@ -6,6 +6,8 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^2.13.1",
-    "eslint-config-google": "^0.6.0"
+    "eslint-config-google": "^0.6.0",
+    "remark-lint": "^4.0.1",
+    "remark-cli": "^1.0.0"
   }
 }
