@@ -1,0 +1,12 @@
+extends: google
+installedESLint: true
+env:
+  browser: true
+  node: false
+  jquery: true
+rules:
+  spaced-comment:
+    - 1
+    - always
+    - line:
+        markers: ['=']

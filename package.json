@@ -1,0 +1,11 @@
+{
+  "name": "todos",
+  "version": "0.0.1",
+  "description": "A not-so-basic todos app",
+  "author": "Charles A. Beynon",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-google": "^0.6.0"
+  }
+}
