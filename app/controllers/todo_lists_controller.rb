@@ -12,8 +12,10 @@ class TodoListsController < ApplicationController
 
   def update
     if @todo_list.update(todo_list_params)
+      flash[:notice] = 'Todo List successfully updated.'
       redirect_to @todo_list
     else
+      flash[:error] = 'Validation errors.'
       render :edit
     end
   end
@@ -25,8 +27,10 @@ class TodoListsController < ApplicationController
   def create
     @todo_list = TodoList.new(todo_list_params)
     if @todo_list.save
+      flash[:notice] = 'Todo List successfully created.'
       redirect_to @todo_list
     else
+      flash[:error] = 'Validation errors.'
       render :new
     end
   end
