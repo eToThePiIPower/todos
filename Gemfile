@@ -18,6 +18,7 @@ gem 'slim', '~> 3.0.7'
 
 group :development, :test do
   gem 'byebug'
+  gem 'capybara'
   gem 'rspec-rails', '~> 3.4.2'
   gem 'shoulda-matchers', '~> 3.1'
 end
