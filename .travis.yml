@@ -20,3 +20,6 @@ before_script:
 script:
   - bundle exec rake spec
   - bundle exec rake lint
+branches:
+  only:
+    - master
