@@ -7,5 +7,5 @@
     - @todo_items.each do |item|
       li.list-group-item
         = item.name
-        time.timeago.badge[datetime=item.created_at.iso8601]
+        time.timeago.badge[datetime=item.created_at.iso8601 shorttime=item.created_at.strftime('%c %Z')]
           = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
