@@ -17,6 +17,8 @@ gem 'bootswatch-rails'
 gem 'font-awesome-rails'
 gem 'slim', '~> 3.0.7'
 
+gem 'codecov', require: false, group: :test
+
 group :development, :test do
   gem 'byebug'
   gem 'capybara'
