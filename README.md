@@ -81,6 +81,6 @@ rake spec
 
 [license]: LICENSE.txt
 
-[travis-badge]: https://travis-ci.org/eToThePiIPower/todos.svg?branch=master
+[travis-badge]: https://img.shields.io/travis/eToThePiIPower/todos.svg
 
 [travis-status]: https://travis-ci.org/eToThePiIPower/todos "Todos on Travis CI"
