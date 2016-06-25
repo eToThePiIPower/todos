@@ -1,5 +1,7 @@
 # Todos
 
+[![Build Status][travis-badge]][travis-status]
+
 A not-so-basic todos app
 
 **Todos** aims to be a free and open-source todos app supporting ideas from
@@ -44,6 +46,9 @@ ESLint for dev which gets installed via npm.
 npm install
 ```
 
+In order to ensure a clean, standardized coding style, linters are provided
+in the development environment and enforced in Travis CI.
+
 You can run the linters individually or in bulk via rake, which
 has the added benefit of providing consistent success/failure
 messages with color coding :D
@@ -70,6 +75,12 @@ rake spec
 
 [MIT][license]
 
+<!-- Definitions -->
+
 [cb]: https://github.com/eToThePiIPower "Charles Beynon"
 
 [license]: LICENSE.txt
+
+[travis-badge]: https://travis-ci.org/eToThePiIPower/todos.svg?branch=master
+
+[travis-status]: https://travis-ci.org/eToThePiIPower/todos "Todos on Travis CI"

@@ -4,5 +4,6 @@ Documentation:
 AllCops:
   Exclude:
     - db/**
+    - vendor/**/*
 Rails:
   Enabled: true
