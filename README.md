@@ -1,5 +1,7 @@
 # Todos
 
+[![Build Status][travis-badge]][travis-status]
+
 A not-so-basic todos app
 
 **Todos** aims to be a free and open-source todos app supporting ideas from
@@ -70,6 +72,12 @@ rake spec
 
 [MIT][license]
 
+<!-- Definitions -->
+
 [cb]: https://github.com/eToThePiIPower "Charles Beynon"
 
 [license]: LICENSE.txt
+
+[travis-badge]: https://travis-ci.org/eToThePiIPower/todos.svg?branch=master
+
+[travis-status]: https://travis-ci.org/eToThePiIPower/todos "Todos on Travis CI"
