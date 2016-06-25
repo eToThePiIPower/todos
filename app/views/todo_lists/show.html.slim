@@ -3,3 +3,9 @@
     = @todo_list.name
   p.lead
     = @todo_list.description
+  ul.list-group#todo-list-items
+    - @todo_items.each do |item|
+      li.list-group-item
+        = item.name
+        time.timeago.badge[datetime=item.created_at.iso8601]
+          = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
