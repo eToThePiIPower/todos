@@ -6,6 +6,7 @@ class TodoListsController < ApplicationController
 
   def show
     @todo_items = @todo_list.todo_items
+    @todo_item = TodoItem.new
   end
 
   def edit
