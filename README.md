@@ -46,6 +46,9 @@ ESLint for dev which gets installed via npm.
 npm install
 ```
 
+In order to ensure a clean, standardized coding style, linters are provided
+in the development environment and enforced in Travis CI.
+
 You can run the linters individually or in bulk via rake, which
 has the added benefit of providing consistent success/failure
 messages with color coding :D
