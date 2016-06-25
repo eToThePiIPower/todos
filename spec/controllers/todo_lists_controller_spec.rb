@@ -26,7 +26,7 @@ RSpec.describe TodoListsController, type: :controller do
       it 'redirects to the newly updated todo list' do
         @todo_list = create(:todo_list)
 
-        put :update, id: @todo_list.id, todo_list: { name: 'New Name' }
+        put :update, id: @todo_list, todo_list: { name: 'New Name' }
 
         expect(response).to redirect_to @todo_list
         expect(flash[:notice]).to match(/^Todo List successfully updated./)
@@ -37,11 +37,41 @@ RSpec.describe TodoListsController, type: :controller do
       it 'renders the form with errors' do
         @todo_list = create(:todo_list)
 
-        put :update, id: @todo_list.id, todo_list: { name: '' }
+        put :update, id: @todo_list, todo_list: { name: '' }
 
         expect(response).to render_template :edit
         expect(flash[:error]).to match(/^Validation errors./)
       end
+    end
+  end
+
+  describe 'GET #index' do
+    it 'retrieves all of the todo lists' do
+      3.times { create(:todo_list) }
+
+      get :index
+
+      expect(response).to render_template :index
+      expect(assigns(:todo_lists).length).to be(3)
+      expect(assigns(:todo_lists).first).to eq(TodoList.first)
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'destroys the todo list' do
+      @todo_list = create(:todo_list)
+
+      expect do
+        delete :destroy, id: @todo_list
+      end.to change(TodoList, :count).by(-1)
+    end
+
+    it 'redirects to the index' do
+      @todo_list = create(:todo_list)
+
+      delete :destroy, id: @todo_list
+
+      expect(response).to redirect_to :todo_lists
     end
   end
 end
