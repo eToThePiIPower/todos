@@ -1,6 +1,7 @@
 # Todos
 
 [![Build Status][travis-badge]][travis-status]
+[![Code Coverage][codecov-badge]][codecov-status]
 
 A not-so-basic todos app
 
@@ -78,6 +79,10 @@ rake spec
 <!-- Definitions -->
 
 [cb]: https://github.com/eToThePiIPower "Charles Beynon"
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/eToThePiIPower/todos.svg
+
+[codecov-status]: https://codecov.io/gh/eToThePiIPower/todos
 
 [license]: LICENSE.txt
 
