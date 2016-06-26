@@ -1,15 +1,26 @@
 .container
-  ul.list-group#todo-lists-group
-    - @todo_lists.each do |list|
-      li.list-group-item[id=list.id]
-        .todo-list-name
-          = link_to(list.name, list)
-        .todo-list-description
-          = list.description
-        .todo-list-actions
-          = link_to(edit_todo_list_url(list), class: 'btn btn-info btn-xs') do
-            i.fa.fa-edit[aria-hidden='true']
-            span.sr-only Edit this item
-          = link_to(todo_list_url(list), method: :delete, class: 'btn btn-danger btn-xs') do
-            i.fa.fa-remove[aria-hidden='true']
-            span.sr-only Delete this item
+  h1 Your Todos
+  p.lead These are your Todos. There are many like them but these ones are yours.
+
+  - if @todo_lists.empty?
+    .well
+      h2 You don't have any lists!
+      p.lead Try adding an list below.
+      = link_to 'Create Todo List', new_todo_list_path,
+        class: 'btn btn-primary btn-outline'
+
+  - else
+    ul.list-group#todo-lists-group
+      - @todo_lists.each do |list|
+        li.list-group-item[id=list.id]
+          .todo-list-name
+            = link_to(list.name, list)
+          .todo-list-description
+            = list.description
+          .todo-list-actions
+            = link_to(edit_todo_list_url(list), class: 'btn btn-info btn-xs') do
+              i.fa.fa-edit[aria-hidden='true']
+              span.sr-only Edit this item
+            = link_to(todo_list_url(list), method: :delete, class: 'btn btn-danger btn-xs') do
+              i.fa.fa-remove[aria-hidden='true']
+              span.sr-only Delete this item
