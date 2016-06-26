@@ -3,6 +3,12 @@
     = @todo_list.name
   p.lead
     = @todo_list.description
+
+  - if @todo_items.empty?
+    .well
+      h2 This list is empty!
+      p.lead Try adding an item below.
+
   ul.list-group#todo-list-items
     - @todo_items.each do |item|
       li.list-group-item[id=item.id]
