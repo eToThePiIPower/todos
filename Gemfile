@@ -1,3 +1,4 @@
+ruby '2.3.1'
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
@@ -18,6 +19,8 @@ gem 'font-awesome-rails'
 gem 'slim', '~> 3.0.7'
 
 gem 'codecov', require: false, group: :test
+
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'byebug'
