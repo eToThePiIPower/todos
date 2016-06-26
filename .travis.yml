@@ -6,7 +6,9 @@ env:
   - TRAVIS_NODE_VERSION="6"
 install:
   - bundle install --jobs=3 --retry=3 --deployment --path=${BUNDLE_PATH:-vendor/bundle}
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm
+    && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm
+    install $TRAVIS_NODE_VERSION
   - npm install
 cache:
   bundler: true
@@ -23,3 +25,12 @@ script:
 branches:
   only:
     - master
+deploy:
+  provider: heroku
+  api_key:
+    secure: SiwARmtL1hvO/q1DShfRE1ijB6NEw5e3cNQ/Ve5fhTMjB+AJ/Q0Lc3CdXA+D4whXaUQBubX3c9RlJvYWbOc1xpf6pD8j4j9Oqb52qeYybpp5H2kD9DJvm94r76ZqWNUf1rKH19Bl53QE1RNgeDeiS8FclroxmNIkfr275MmU8xQDU4a4wXMIvCCba+BDajBwqaxfT3eui8IjMbk78DErzRpN+WMLhE7G+eWjjA5jOMUzbgE6yxo9DQaxTxUN7VElA3TOgeT9XOX/U58XX7KUsOCZQp9RR2TJt+L5uhKaliPZPlc+HnwPHWLGFvmi7+NSEkISsBXglgtdZOX6abxE8wCKNZfL0IqLQocAFFxZCrY5W6zz8LX69MzinFyNYUOO2Moa4ekRmZUvvYvdlBeZv05TrXAhO6262oRahYxK7dznkqu502SQ80dhLJUwWp40KYzGEUnxRMY2tqm0cmyrlalpMrn1YLaBLdu7jfIivrfeGGoACHVKgLRJ+Dmp6HMLnWRsGvaep3XDB5MkBmhkBK6P9Mx1PngJqpSqvKCuGcfujamPdkjjJrK9SGjCcEyC+A9EJDlultHoPzBtveJfrnZTUD78jIpYgkNRrTUFQ6HUGSDv1JFB5StyVc0kgb9qbI592iI83P4pi6len83B5+bAYejSky9r3X7QezzzW0U=
+  run:
+    - rake db:migrate
+  app: get-todos-done
+  on:
+    repo: eToThePiIPower/todos
