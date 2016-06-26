@@ -1,0 +1,15 @@
+.todo-item-name
+  = item.name
+.todo-item-createdat
+  time.timeago[datetime=item.created_at.iso8601 shorttime=item.created_at.strftime('%c %Z')]
+    = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
+.todo-item-actions
+  a.btn.btn-xs.btn-info
+    i.fa.fa-edit[aria-hidden='true']
+    span.sr-only Edit this item
+  = link_to [@todo_list, item],
+      method: :delete,
+      data: { confirm: 'Are you sure?' },
+      class: 'btn btn-xs btn-danger' do
+    i.fa.fa-remove[aria-hidden='true']
+    span.sr-only Delete this item

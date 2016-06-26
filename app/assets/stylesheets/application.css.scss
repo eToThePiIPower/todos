@@ -13,12 +13,6 @@
   @extend .has-error;
 }
 
-.list-group-item {
-  .btn-group-xs {
-    top: -5.6px;
-  }
-}
-
 @media print {
   time.timeago {
     visibility: hidden;
