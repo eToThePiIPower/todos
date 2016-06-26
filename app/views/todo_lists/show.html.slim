@@ -3,3 +3,29 @@
     = @todo_list.name
   p.lead
     = @todo_list.description
+
+  - if @todo_items.empty?
+    .well
+      h2 This list is empty!
+      p.lead Try adding an item below.
+
+  ul.list-group#todo-list-items
+    - @todo_items.each do |item|
+      li.list-group-item[id=item.id]
+        = item.name
+        span.timeago-span.small
+          ' added
+          time.timeago[datetime=item.created_at.iso8601 shorttime=item.created_at.strftime('%c %Z')]
+            = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
+        .btn-group.pull-right.btn-group-xs
+          a.btn.btn-info
+            i.fa.fa-edit[aria-hidden='true']
+            span.sr-only Edit this item
+          = link_to [@todo_list, item],
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'btn btn-danger' do
+            i.fa.fa-remove[aria-hidden='true']
+            span.sr-only Delete this item
+
+  = render 'todo_items/form'

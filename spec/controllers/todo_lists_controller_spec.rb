@@ -45,6 +45,18 @@ RSpec.describe TodoListsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    it 'assigns the list and an array of its items' do
+      @todo_list = create(:todo_list_with_items)
+      @todo_items = @todo_list.todo_items
+
+      get :show, id: @todo_list
+
+      expect(assigns(:todo_list)).to eq @todo_list
+      expect(assigns(:todo_items)).to eq @todo_items
+    end
+  end
+
   describe 'GET #index' do
     it 'retrieves all of the todo lists' do
       3.times { create(:todo_list) }

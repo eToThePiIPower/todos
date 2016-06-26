@@ -1,0 +1,8 @@
+= form_for [@todo_list, @todo_item] do |f|
+  fieldset
+    legend Add an item
+    .form-group
+      = f.label :name, 'New Item', class: 'control-label hidden'
+      = f.text_field :name, class: 'form-control', placeholder: 'Item'
+    .form-group
+      = f.submit 'Add Item', class: 'btn btn-primary form-control'
