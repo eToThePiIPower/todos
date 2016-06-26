@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'todo_lists#index'
   resources :todo_lists do
-    post 'todo_items' => 'todo_items#create'
+    resources :todo_items, only: [:create, :destroy]
   end
 
   # Static Pages

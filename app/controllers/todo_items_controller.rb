@@ -10,10 +10,24 @@ class TodoItemsController < ApplicationController
     end
     redirect_to @todo_list
   end
-end
 
-private
+  def destroy
+    @todo_item = set_todo_item
+    @todo_list = @todo_item.todo_list
 
-def todo_item_params
-  params.require(:todo_item).permit(:name)
+    @todo_item.destroy
+
+    flash[:notice] = 'Item successfully deleted.'
+    redirect_to @todo_list
+  end
+
+  private
+
+  def set_todo_item
+    @todo_item = TodoItem.find(params[:id])
+  end
+
+  def todo_item_params
+    params.require(:todo_item).permit(:name)
+  end
 end

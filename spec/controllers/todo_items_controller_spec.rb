@@ -24,4 +24,17 @@ RSpec.describe TodoItemsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    context 'with a valid item' do
+      it 'destroys the item and flashes success' do
+        @todo_list = create(:todo_list_with_items, items_count: 5)
+        @todo_item = @todo_list.todo_items.first
+
+        delete :destroy, id: @todo_item, todo_list_id: @todo_list
+
+        expect(flash[:notice]).to match(/^Item successfully deleted./)
+      end
+    end
+  end
 end
