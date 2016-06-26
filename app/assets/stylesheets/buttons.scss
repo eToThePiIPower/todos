@@ -1,0 +1,30 @@
+.btn-outline {
+  background-color: transparent;
+  color: inherit;
+  transition: all 0.5s;
+  &.btn-primary {
+    color: $brand-primary;
+  }
+  &.btn-success {
+    color: $brand-success;
+  }
+  &.btn-default {
+    color: $gray;
+  }
+  &.btn-info {
+    color: $brand-info;
+  }
+  &.btn-warning {
+    color: $brand-warning;
+  }
+  &.btn-danger {
+    color: $brand-danger;
+  }
+
+  &.btn-default, &.btn-primary, &.btn-success,
+  &.btn-info, &.btn-warning, &.btn-danger {
+    &:hover {
+      color: #fff;
+    }
+  }
+}
