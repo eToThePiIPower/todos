@@ -1,5 +1,5 @@
 feature 'User creates a list' do
-  scenario 'they see the list on the page' do
+  scenario 'they see the list form on the page' do
     visit new_todo_list_path
 
     fill_in 'Name', with: 'My List'
