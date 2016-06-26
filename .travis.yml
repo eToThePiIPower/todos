@@ -34,3 +34,4 @@ deploy:
   app: get-todos-done
   on:
     repo: eToThePiIPower/todos
+    rvm: 2.3.1
