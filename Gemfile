@@ -15,6 +15,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootswatch-rails'
+gem 'data-confirm-modal', git: 'git://github.com/eToThePiIPower/data-confirm-modal'
 gem 'font-awesome-rails'
 gem 'slim', '~> 3.0.7'
 

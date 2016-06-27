@@ -9,7 +9,7 @@
     span.sr-only Edit this item
   = link_to [@todo_list, item],
       method: :delete,
-      data: { confirm: 'Are you sure?' },
+      data: { confirm: 'Are you sure you want to delete this item? This action cannot be undone.' },
       class: 'btn btn-xs btn-danger' do
     i.fa.fa-remove[aria-hidden='true']
     span.sr-only Delete this item

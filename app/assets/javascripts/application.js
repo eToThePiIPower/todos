@@ -15,9 +15,15 @@
 //= require jquery.timeago
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require data-confirm-modal
 //= require turbolinks
 //= require_tree .
 
 $(document).ready(function() {
   $("time.timeago").timeago();
+});
+
+/* global dataConfirmModal */
+dataConfirmModal.setDefaults({
+  modalClass: 'type-danger'
 });

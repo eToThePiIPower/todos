@@ -1,0 +1,32 @@
+.modal {
+  &.type-primary {
+    .modal-header {
+      background-color: $brand-primary;
+      color: #fff;
+    }
+  }
+  &.type-success {
+    .modal-header {
+      background-color: $brand-success;
+      color: #fff;
+    }
+  }
+  &.type-info {
+    .modal-header {
+      background-color: $brand-info;
+      color: #fff;
+    }
+  }
+  &.type-warning {
+    .modal-header {
+      background-color: $brand-warning;
+      color: #fff;
+    }
+  }
+  &.type-danger {
+    .modal-header {
+      background-color: $brand-danger;
+      color: #fff;
+    }
+  }
+}
