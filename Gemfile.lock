@@ -1,6 +1,7 @@
 GIT
-  remote: git://github.com/eToThePiIPower/data-confirm-modal
-  revision: 47f12edb9593ae22bd93fff4c0f1843bd1fe9b86
+  remote: git://github.com/eToThePiIPower/data-confirm-modal.git
+  revision: 9f5cdfec6f0c855b76e165c14248eb7ca59b885d
+  branch: feat/add-custom-data-modal-class-attribute-support
   specs:
     data-confirm-modal (1.2.0)
       railties (>= 3.0)
