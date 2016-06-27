@@ -7,3 +7,6 @@ AllCops:
     - vendor/**/*
 Rails:
   Enabled: true
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/**/*.rb

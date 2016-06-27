@@ -21,6 +21,8 @@ gem 'data-confirm-modal',
 gem 'font-awesome-rails'
 gem 'slim', '~> 3.0.7'
 
+gem 'devise'
+
 gem 'codecov', require: false, group: :test
 
 gem 'rails_12factor', group: :production

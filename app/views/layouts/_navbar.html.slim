@@ -9,5 +9,7 @@ nav.navbar.navbar-default.navbar-static-top
         span.icon-bar
       = link_to 'Home', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
-      ul.nav.navbar-nav
+      ul.nav.navbar-nav.navbar-left
         = render 'layouts/navbar_links'
+      ul.nav.navbar-nav.navbar-right
+        = render 'layouts/navbar_user'

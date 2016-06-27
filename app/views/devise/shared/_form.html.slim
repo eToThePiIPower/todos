@@ -1,0 +1,50 @@
+= form_for(resource, as: resource_name, url: url,
+    html: { method: method }) do |f|
+  legend = title
+  .fieldset
+    .form-group
+      = f.label :email, class: 'control-label'
+      = f.email_field :email, autofocus: true, class: 'form-control'
+
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        p Currently waiting confirmation for: <%= resource.unconfirmed_email
+
+    .form-group
+      = f.label :password, class: 'control-label'
+      - if controller_name == 'registrations' && method == :put
+        em.small
+          |  (leave blank if you don't want to change it)
+      - if controller_name == 'registrations' && method == :post
+        em.small
+          |  (
+          = @minimum_password_length
+          '  characters minimum)
+      = f.password_field :password, autocomplete: 'off', class: 'form-control'
+
+    - if controller_name == 'registrations'
+      .form-group
+        = f.label :password_confirmation, class: 'control-label'
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+
+    - if controller_name == 'registrations' && method == :put
+      .form-group
+        = f.label :current_password, class: 'control-label'
+        em.small
+          |  (we need your current password to confirm your changes)
+        = f.password_field :current_password, autocomplete: 'off', class: 'form-control'
+
+    - if devise_mapping.rememberable? && controller_name == 'sessions'
+      .form-group.checkbox
+        = f.label :remember_me do
+          = f.check_box :remember_me
+          | Remember me
+    - if controller_name == 'registrations'
+      .form-group
+        p
+          ' By clicking the Sign Up button below you are agreeing to Wheaton' Law,
+          ' don't be a dick.
+
+    .form-group
+       = f.submit title, class: 'btn btn-primary form-control'
+
+= render 'devise/shared/links'
