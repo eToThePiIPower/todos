@@ -21,6 +21,9 @@
             = link_to(edit_todo_list_url(list), class: 'btn btn-info btn-xs') do
               i.fa.fa-edit[aria-hidden='true']
               span.sr-only Edit this item
-            = link_to(todo_list_url(list), method: :delete, class: 'btn btn-danger btn-xs') do
+            = link_to(todo_list_url(list),
+                method: :delete,
+                data: list.data_confirm,
+                class: 'btn btn-danger btn-xs') do
               i.fa.fa-remove[aria-hidden='true']
               span.sr-only Delete this item
