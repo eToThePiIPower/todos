@@ -1,12 +1,15 @@
-- modal ||= false
-- form ||= :login
-- method ||= :post
+ruby:
+  modal ||= false
+  form ||= :login
+  method ||= :post
+  html_form_id ||= "#{modal ? 'modal' : 'page'}-#{form}-form"
 
 = form_for(resource, as: resource_name, url: url,
-    html: { method: method }) do |f|
+    html: { method: method, id: html_form_id }) do |f|
 
   - unless modal
     legend = title
+    = render 'devise/shared/error_messages'
 
   .fieldset
     .form-group
