@@ -1,0 +1,15 @@
+.modal.type-primary.fade.in#edit[tabindex="-1"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-hidden="true"] ×
+        h4 Edit User
+      .modal-body
+        = render 'devise/shared/form',
+          title: 'Edit User',
+          url: registration_path(resource_name),
+          form: :edit,
+          method: :put,
+          modal: true
+      .modal-footer
+        = render 'devise/shared/links', form: :edit, modal: true

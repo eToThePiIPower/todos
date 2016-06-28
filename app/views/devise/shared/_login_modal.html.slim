@@ -1,0 +1,14 @@
+.modal.type-primary.fade.in#login[tabindex="-1"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-hidden="true"] ×
+        h4 Log In
+      .modal-body
+        = render 'devise/shared/form',
+            title: 'Log In',
+            url: session_path(resource_name),
+            modal: true,
+            form: :login
+      .modal-footer
+        = render 'devise/shared/links', form: :login

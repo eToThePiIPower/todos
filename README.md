@@ -24,6 +24,19 @@ rake db:create
 rake db:migrate
 ```
 
+Setup a `.env` file if you want to be able to send mails in Devise on your
+development system. The `dotenv-rails` gem will automatically load these
+environment variables when you start your server.
+
+```sh
+# /.env
+RAILS_SMTP_ADDRESS = 'smtp.gmail.com'
+RAILS_SMTP_PORT = 587
+RAILS SMTP_DOMAIN = 'gmail.com'
+RAILS_SMTP_USERNAME = 'user@gmail.com'
+RAILS_SMTP_PASSWORD = 'password1234'
+```
+
 Start the server locally:
 
 ```ruby

@@ -1,0 +1,19 @@
+.container
+  = render 'devise/shared/form',
+      title: 'Edit User',
+      url: registration_path(resource_name),
+      form: :edit,
+      method: :put
+
+.container
+  h4 Cancel my account
+
+  p
+    ' Unhappy? Want to leave? We'll miss you!
+  = link_to 'Cancel my account',
+    registration_path(resource_name),
+    data: { confirm: 'Are you sure you want to delete your account?',
+            verify: current_user.email,
+            verify_text: "Type \"#{current_user.email}\" to continue." },
+    class: 'btn btn-danger btn-xs',
+    method: :delete

@@ -12,9 +12,22 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Setup the mailer for Devise
+  config.action_mailer.default_url_options = {
+    host: ENV['RAILS_MAILER_HOST'],
+    port: ENV['RAILS_MAILER_PORT'],
+  }
+  config.action_mailer.smtp_settings = {
+    address: ENV['RAILS_SMTP_ADDRESS'],
+    port: ENV['RAILS_SMTP_PORT'].to_i,
+    domain: ENV['RAILS_SMTP_DOMAIN'],
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    user_name: ENV['RAILS_SMTP_USERNAME'],
+    password: ENV['RAILS_SMTP_PASSWORD'],
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

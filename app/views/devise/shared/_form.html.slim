@@ -1,0 +1,61 @@
+ruby:
+  modal ||= false
+  form ||= :login
+  method ||= :post
+  html_form_id ||= "#{modal ? 'modal' : 'page'}-#{form}-form"
+
+= form_for(resource, as: resource_name, url: url,
+    html: { method: method, id: html_form_id }) do |f|
+
+  - unless modal
+    legend = title
+    = render 'devise/shared/error_messages'
+
+  .fieldset
+    .form-group
+      = f.label :email, class: 'control-label'
+      = f.email_field :email, autofocus: true, class: 'form-control'
+
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        p Currently waiting confirmation for: <%= resource.unconfirmed_email
+
+    .form-group
+      = f.label :password, class: 'control-label'
+      - if form == :edit
+        em.small
+          |  (leave blank if you don't want to change it)
+      - if form == :signup
+        em.small
+          |  (
+          = minimum_password_length
+          '  characters minimum)
+      = f.password_field :password, autocomplete: 'off', class: 'form-control'
+
+    - if form == :signup || form == :edit
+      .form-group
+        = f.label :password_confirmation, class: 'control-label'
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+
+    - if form == :edit
+      .form-group
+        = f.label :current_password, class: 'control-label'
+        em.small
+          |  (we need your current password to confirm your changes)
+        = f.password_field :current_password, autocomplete: 'off', class: 'form-control'
+
+    - if devise_mapping.rememberable? && form == :login
+      .form-group.checkbox
+        = f.label :remember_me do
+          = f.check_box :remember_me
+          | Remember me
+
+    .form-group.actions
+      - if form == :signup
+        p
+          ' By clicking the Sign Up button below you are agreeing to Wheaton's Law,
+          ' don't be a dick.
+      .form-group
+        = f.submit title, class: 'btn btn-primary form-control'
+
+- unless modal
+  = render 'devise/shared/links', form: form
