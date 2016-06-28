@@ -30,6 +30,7 @@ gem 'rails_12factor', group: :production
 group :development, :test do
   gem 'byebug'
   gem 'capybara'
+  gem 'dotenv-rails'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails', '~> 3.4.2'
   gem 'shoulda-matchers', '~> 3.1'
