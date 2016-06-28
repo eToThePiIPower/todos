@@ -63,6 +63,9 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default charset: 'utf-8'
   config.action_controller.perform_caching = true
   config.action_mailer.raise_delivery_errors = false
 
@@ -74,7 +77,7 @@ Rails.application.configure do
     address: ENV['RAILS_SMTP_ADDRESS'],
     port: ENV['RAILS_SMTP_PORT'].to_i,
     domain: ENV['RAILS_SMTP_DOMAIN'],
-    authentication: 'plain',
+    authentication: :cram_md5,
     enable_starttls_auto: true,
     user_name: ENV['RAILS_SMTP_USERNAME'],
     password: ENV['RAILS_SMTP_PASSWORD'],
