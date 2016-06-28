@@ -3,6 +3,7 @@ html
   head
     meta[http-equiv='X-UA-Compatible' content='IE=edge']
     meta[name='viewport' content='width=device-width, initial-scale=1']
+    meta[name='format-detection' content='email=no;address=no;telephone=no']
     title
       | Todos
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
@@ -13,5 +14,10 @@ html
     header
       = render 'layouts/navbar'
     main[role="main"]
+      - if user_signed_in?
+        = render 'devise/shared/edit_modal'
+      - else
+        = render 'devise/shared/login_modal'
+        = render 'devise/shared/signup_modal'
       = render 'layouts/messages'
       = yield
