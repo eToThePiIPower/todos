@@ -49,14 +49,13 @@ ruby:
           = f.check_box :remember_me
           | Remember me
 
-    - if form == :signup
-      .form-group
+    .form-group.actions
+      - if form == :signup
         p
           ' By clicking the Sign Up button below you are agreeing to Wheaton's Law,
           ' don't be a dick.
-
-    .form-group
-       = f.submit title, class: 'btn btn-primary form-control'
+      .form-group
+        = f.submit title, class: 'btn btn-primary form-control'
 
 - unless modal
   = render 'devise/shared/links', form: form
