@@ -12,7 +12,8 @@
   - else
     ul.list-group#todo-items-group
       - @todo_items.each do |item|
-        li.list-group-item[id=item.id]
+        - todo_list_item_classes = item.complete? ? 'todo-list-item-complete' : 'todo-list-item-incomplete'
+        li.list-group-item[id=item.id class=todo_list_item_classes]
           = render 'todo_items/show', item: item
 
   = render 'todo_items/form'

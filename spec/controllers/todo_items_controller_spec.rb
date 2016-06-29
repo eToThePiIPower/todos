@@ -105,4 +105,88 @@ RSpec.describe TodoItemsController, type: :controller do
       end
     end
   end
+
+  context 'PUT #complete' do
+    before do
+      @owner = create(:user)
+      @todo_list = create(:todo_list_with_items, items_count: 5, user: @owner)
+      @todo_item = @todo_list.todo_items.first
+    end
+
+    context 'when the user owns the containing list' do
+      it 'marks the item as complete' do
+        sign_in @owner
+
+        put :complete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).to be_complete
+      end
+    end
+
+    context 'when the user does not own the containing list' do
+      it 'does not mark the item as complete' do
+        @user = create(:user)
+        sign_in @user
+
+        put :complete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).not_to be_complete
+        expect_it_to_return_an_authorization_error
+      end
+    end
+
+    context 'when the user is not logged in' do
+      it 'does not mark the item as complete' do
+        put :complete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).not_to be_complete
+        expect_it_to_require_the_user_be_signed_in
+      end
+    end
+  end
+
+  context 'PUT #uncomplete' do
+    before do
+      @owner = create(:user)
+      @todo_list = create(:todo_list_with_completed_items, items_count: 5, user: @owner)
+      @todo_item = @todo_list.todo_items.first
+    end
+
+    context 'when the user owns the containing list' do
+      it 'unmarks the item as complete' do
+        sign_in @owner
+
+        delete :uncomplete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).not_to be_complete
+      end
+    end
+
+    context 'when the user does not own the containing list' do
+      it 'does not unmark the item as complete' do
+        @user = create(:user)
+        sign_in @user
+
+        delete :uncomplete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).to be_complete
+        expect_it_to_return_an_authorization_error
+      end
+    end
+
+    context 'when the user is not logged in' do
+      it 'does not unmark the item as complete' do
+        delete :uncomplete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).to be_complete
+        expect_it_to_require_the_user_be_signed_in
+      end
+    end
+  end
 end

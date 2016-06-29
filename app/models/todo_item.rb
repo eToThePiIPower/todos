@@ -6,4 +6,16 @@ class TodoItem < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, length: { minimum: 3 }
+
+  def complete!
+    self[:completed_at] = Time.current unless complete?
+  end
+
+  def uncomplete!
+    self[:completed_at] = nil
+  end
+
+  def complete?
+    !self[:completed_at].nil? && self[:completed_at] < Time.current
+  end
 end

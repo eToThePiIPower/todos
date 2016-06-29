@@ -43,3 +43,9 @@
     }
   }
 }
+
+.todo-list-item-complete {
+  @extend .list-group-item-success;
+}
+.todo-list-item-incomplete {
+}
