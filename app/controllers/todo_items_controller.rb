@@ -1,6 +1,9 @@
 class TodoItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:destroy, :create]
+  before_action :authorize_ownership!, only: :destroy
+  before_action :authorize_ownership_of_list!, only: :create
+
   def create
-    @todo_list = TodoList.find(params[:todo_list_id])
     @todo_item = @todo_list.todo_items.new(todo_item_params)
 
     if @todo_item.save
@@ -12,7 +15,6 @@ class TodoItemsController < ApplicationController
   end
 
   def destroy
-    @todo_item = set_todo_item
     @todo_list = @todo_item.todo_list
 
     @todo_item.destroy
@@ -23,8 +25,20 @@ class TodoItemsController < ApplicationController
 
   private
 
-  def set_todo_item
-    @todo_item = TodoItem.find(params[:id])
+  def authorize_ownership!
+    @todo_item = current_user.todo_items.find_by_id(params[:id])
+    if @todo_item.nil? || current_user != @todo_item.user
+      flash[:alert] = 'You are not the owner of that item or the item does not exist.'
+      redirect_to root_path
+    end
+  end
+
+  def authorize_ownership_of_list!
+    @todo_list = current_user.todo_lists.find_by_id(params[:todo_list_id])
+    if @todo_list.nil? || current_user != @todo_list.user
+      flash[:alert] = 'You are not the owner of that list or the list does not exist.'
+      redirect_to root_path
+    end
   end
 
   def todo_item_params
