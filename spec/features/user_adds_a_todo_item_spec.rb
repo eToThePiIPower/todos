@@ -1,6 +1,8 @@
 feature 'User adds a todo item' do
   before do
-    @todo_list = create(:todo_list)
+    @user = create(:user)
+    @todo_list = @user.todo_lists.create(attributes_for(:todo_list))
+    login_as @user
   end
 
   scenario 'they see the list on the page' do

@@ -10,6 +10,19 @@
 .jumbotron {
   background-color: $brand-primary;
   color: $body-bg;
+  a {
+    color: #fff;
+  }
+  &.no-navbar-margin {
+    margin-top: -21px;
+  }
+  .jumbotron-actions {
+    margin: 0 auto;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+    text-align: center;
+  }
 }
 
 .field_with_errors {
