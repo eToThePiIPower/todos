@@ -195,11 +195,11 @@ RSpec.describe TodoListsController, type: :controller do
     end
 
     context 'when nobody is logged in' do
-      it 'redirects to the login page with an error' do
+      it 'renders the welcome page and assigns todo_lists as empty' do
         get :index
 
-        expect(assigns(:todo_lists)).to be_nil
-        expect_it_to_require_the_user_be_signed_in
+        expect(assigns(:todo_lists)).to be_empty
+        expect(response).to render_template :welcome
       end
     end
   end

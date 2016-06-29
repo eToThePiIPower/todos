@@ -1,10 +1,16 @@
 class TodoListsController < ApplicationController
   before_action :set_todo_list, only: [:destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :authorize_ownership!, only: [:edit, :update, :show, :destroy]
 
   def index
-    @todo_lists = current_user.todo_lists
+    if current_user
+      @todo_lists = current_user.todo_lists
+      render :index
+    else
+      @todo_lists = []
+      render :welcome
+    end
   end
 
   def show

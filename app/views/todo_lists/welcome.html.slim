@@ -1,0 +1,14 @@
+.jumbotron.no-navbar-margin
+  .container
+    h1 Welcome
+    p Todos is an app for prioritizing your tasks.
+
+    .jumbotron-actions
+      p
+        = link_to 'Sign Up Now', '#signup',
+            data: { toggle: 'modal', keyboard: true },
+            class: 'btn btn-default btn-lg btn-outline'
+      p
+        = link_to 'Already a user? Log in', '#login',
+            data: { toggle: 'modal', keyboard: true },
+            class: 'btn btn-default btn-sm btn-outline'
