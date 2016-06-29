@@ -36,8 +36,7 @@ RSpec.describe TodoListsController, type: :controller do
       it 'redirects to the log in form' do
         post :create, todo_list: attributes_for(:todo_list)
 
-        expect(response).to redirect_to new_user_session_path
-        expect(flash[:alert]).to match(/^You need to sign in or sign up./)
+        expect_it_to_require_the_user_be_signed_in
       end
     end
   end
@@ -87,8 +86,7 @@ RSpec.describe TodoListsController, type: :controller do
           @todo_list.reload
 
           expect(@todo_list.name).not_to eq 'New Name'
-          expect(response).to redirect_to root_path
-          expect(flash[:alert]).to match(/^You are not the owner of that list or the list does not exist./)
+          expect_it_to_return_an_authorization_error
         end
       end
 
@@ -98,8 +96,7 @@ RSpec.describe TodoListsController, type: :controller do
           @todo_list.reload
 
           expect(@todo_list.name).not_to eq 'New Name'
-          expect(response).to redirect_to root_path
-          expect(flash[:alert]).to match(/^You are not the owner of that list or the list does not exist./)
+          expect_it_to_return_an_authorization_error
         end
       end
     end
@@ -116,8 +113,7 @@ RSpec.describe TodoListsController, type: :controller do
           @todo_list.reload
 
           expect(@todo_list.name).not_to eq 'New Name'
-          expect(response).to redirect_to new_user_session_path
-          expect(flash[:alert]).to match(/^You need to sign in or sign up./)
+          expect_it_to_require_the_user_be_signed_in
         end
       end
     end
@@ -151,8 +147,7 @@ RSpec.describe TodoListsController, type: :controller do
         get :show, id: @todo_list
 
         expect(assigns(:todo_list)).to be_nil
-        expect(response).to redirect_to root_path
-        expect(flash[:alert]).to match(/^You are not the owner of that list or the list does not exist./)
+        expect_it_to_return_an_authorization_error
       end
     end
 
@@ -166,8 +161,7 @@ RSpec.describe TodoListsController, type: :controller do
         get :show, id: @todo_list
 
         expect(assigns(:todo_list)).to be_nil
-        expect(response).to redirect_to new_user_session_path
-        expect(flash[:alert]).to match(/^You need to sign in or sign up./)
+        expect_it_to_require_the_user_be_signed_in
       end
     end
   end
@@ -205,8 +199,7 @@ RSpec.describe TodoListsController, type: :controller do
         get :index
 
         expect(assigns(:todo_lists)).to be_nil
-        expect(response).to redirect_to new_user_session_path
-        expect(flash[:alert]).to match(/^You need to sign in or sign up./)
+        expect_it_to_require_the_user_be_signed_in
       end
     end
   end
@@ -249,8 +242,7 @@ RSpec.describe TodoListsController, type: :controller do
       it 'redirects to the root page with an error' do
         delete :destroy, id: @todo_list
 
-        expect(response).to redirect_to root_path
-        expect(flash[:alert]).to match(/^You are not the owner of that list or the list does not exist./)
+        expect_it_to_return_an_authorization_error
       end
     end
 
@@ -269,8 +261,7 @@ RSpec.describe TodoListsController, type: :controller do
       it 'redirects to the login page with an error' do
         delete :destroy, id: @todo_list
 
-        expect(response).to redirect_to new_user_session_path
-        expect(flash[:alert]).to match(/^You need to sign in or sign up./)
+        expect_it_to_require_the_user_be_signed_in
       end
     end
   end

@@ -9,6 +9,7 @@ require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_girl'
 require 'support/login_helpers'
+require 'support/macros'
 Dir[File.dirname(__FILE__) + '/support/matchers/*.rb'].each { |f| require f }
 
 require 'simplecov'
@@ -72,6 +73,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   # Include custom spec helpers
   config.include LoginHelpers
+  config.include Macros
 end
 
 Shoulda::Matchers.configure do |config|
