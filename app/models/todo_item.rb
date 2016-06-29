@@ -1,5 +1,6 @@
 class TodoItem < ActiveRecord::Base
   belongs_to :todo_list
+  delegate :user, to: :todo_list
 
   validates :todo_list, presence: true
 

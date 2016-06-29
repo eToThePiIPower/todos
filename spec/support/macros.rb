@@ -6,6 +6,6 @@ module Macros
 
   def expect_it_to_return_an_authorization_error
     expect(response).to redirect_to root_path
-    expect(flash[:alert]).to match(/^You are not the owner of that list or the list does not exist./)
+    expect(flash[:alert]).to match(/^You are not the owner of that [a-z]* or the [a-z]* does not exist./)
   end
 end
