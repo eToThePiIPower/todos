@@ -1,5 +1,8 @@
 feature 'User creates a list' do
   scenario 'they see the list form on the page' do
+    @user = create(:user)
+    login_as(@user)
+
     visit new_todo_list_path
 
     fill_in 'Name', with: 'My List'

@@ -14,3 +14,5 @@ Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: 'comma'
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: 'comma'
+Style/GuardClause:
+  Enabled: false
