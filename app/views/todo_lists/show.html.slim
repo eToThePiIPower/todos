@@ -12,9 +12,11 @@
   - else
     ul.list-group#todo-items-group
       - @todo_items.each do |item|
-        - todo_list_item_classes = item.complete? ? ['todo-list-item-complete'] : ['todo-list-item-incomplete']
-        - todo_list_item_classes << 'todo-list-item-old' if item.old?
-        li.list-group-item[id=item.id class=todo_list_item_classes.join(' ')]
+        ruby:
+          todo_list_item_classes = ['list-group-item']
+          todo_list_item_classes << (item.complete? ? 'todo-list-item-complete' : 'todo-list-item-incomplete')
+          todo_list_item_classes << 'todo-list-item-old' if item.old?
+        li[class=todo_list_item_classes id=item.id]
           = render 'todo_items/show', item: item
 
   = render 'todo_items/form'
