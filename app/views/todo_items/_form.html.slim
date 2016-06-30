@@ -5,4 +5,8 @@
       = f.label :name, 'New Item', class: 'control-label hidden'
       = f.text_field :name, class: 'form-control', placeholder: 'Item'
     .form-group
+      = f.label :due_at, 'Due At', class: 'control-label'
+      = f.datetime_local_field :due_at, class: 'form-control',
+          value: 1.days.from_now.to_date.strftime('%Y-%m-%dT%T')
+    .form-group
       = f.submit 'Add Item', class: 'btn btn-primary form-control'

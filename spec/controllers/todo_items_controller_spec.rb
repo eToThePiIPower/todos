@@ -19,14 +19,30 @@ RSpec.describe TodoItemsController, type: :controller do
       end
 
       context 'with valid params' do
+        before do
+          @todo_item = attributes_for(:todo_item)
+        end
+
         it 'renders the parent todo list with success message' do
           expect do
-            post :create, todo_item: attributes_for(:todo_item),
+            post :create, todo_item: @todo_item,
                           todo_list_id: @todo_list
           end.to change(TodoItem, :count).by(1)
 
           expect(flash[:notice]).to match(/^Item successfully added./)
           expect(response).to redirect_to @todo_list
+        end
+
+        it 'accepts an optional due_at' do
+          @todo_item[:due_at] = 1.day.from_now
+
+          expect do
+            post :create, todo_item: @todo_item,
+                          todo_list_id: @todo_list
+          end.to change(TodoItem, :count).by(1)
+
+          expect(flash[:notice]).to match(/^Item successfully added./)
+          expect(TodoItem.first.due_at).to be_within(5.seconds).of(1.day.from_now)
         end
       end
 
