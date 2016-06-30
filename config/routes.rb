@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :todo_lists do
     resources :todo_items, only: [:create, :destroy]
+    put 'todo_items/:id/complete' => 'todo_items#complete', as: :complete
+    delete 'todo_items/:id/complete' => 'todo_items#uncomplete', as: :uncomplete
   end
 
   # Static Pages

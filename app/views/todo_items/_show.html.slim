@@ -1,15 +1,32 @@
-.todo-item-name
+h4.list-group-item-heading
   = item.name
-.todo-item-createdat
-  time.timeago[datetime=item.created_at.iso8601 shorttime=item.created_at.strftime('%c %Z')]
-    = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
-.todo-item-actions
-  a.btn.btn-xs.btn-info
-    i.fa.fa-edit[aria-hidden='true']
-    span.sr-only Edit this item
-  = link_to [@todo_list, item],
+p.list-group-item-text
+  - if item.complete?
+    ' Completed
+    time.timeago[datetime=item.completed_at.iso8601 shorttime=item.completed_at.strftime('%c %Z')]
+      = item.completed_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
+  - else
+    ' Created
+    time.timeago[datetime=item.created_at.iso8601 shorttime=item.created_at.strftime('%c %Z')]
+      = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
+.list-group-item-text.actions
+  = link_to todo_list_todo_item_path(@todo_list, item),
       method: :delete,
       data: { confirm: 'Are you sure you want to delete this item? This action cannot be undone.' },
-      class: 'btn btn-xs btn-danger' do
+      class: 'btn btn-xs btn-link' do
     i.fa.fa-remove[aria-hidden='true']
     span.sr-only Delete this item
+  - if item.complete?
+    = link_to todo_list_uncomplete_path(@todo_list, item),
+        id: "todo-item-toggle-#{item.id}",
+        method: :delete,
+        class: 'btn btn-xs btn-link' do
+      i.fa.fa-check[aria-hidden='true']
+      span.sr-only Uncomplete this item
+  - else
+    = link_to todo_list_complete_path(@todo_list, item),
+        id: "todo-item-toggle-#{item.id}",
+        method: :put,
+        class: 'btn btn-xs btn-link' do
+      i.fa.fa-check[aria-hidden='true']
+      span.sr-only Complete this item

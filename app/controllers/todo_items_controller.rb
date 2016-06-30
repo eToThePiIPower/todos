@@ -1,6 +1,6 @@
 class TodoItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:destroy, :create]
-  before_action :authorize_ownership!, only: :destroy
+  before_action :authenticate_user!, only: [:destroy, :create, :complete, :uncomplete]
+  before_action :authorize_ownership!, only: [:destroy, :complete, :uncomplete]
   before_action :authorize_ownership_of_list!, only: :create
 
   def create
@@ -21,6 +21,18 @@ class TodoItemsController < ApplicationController
 
     flash[:notice] = 'Item successfully deleted.'
     redirect_to @todo_list
+  end
+
+  def complete
+    @todo_item.complete!
+    @todo_item.save
+    redirect_to @todo_item.todo_list
+  end
+
+  def uncomplete
+    @todo_item.uncomplete!
+    @todo_item.save
+    redirect_to @todo_item.todo_list
   end
 
   private
