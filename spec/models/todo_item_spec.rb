@@ -47,6 +47,26 @@ RSpec.describe TodoItem, type: :model do
     end
   end
 
+  describe 'old?' do
+    it 'returns true if completed_at is more than 1 week ago' do
+      @todo_item = build(:todo_item, completed_at: 8.days.ago)
+
+      expect(@todo_item).to be_old
+    end
+
+    it 'returns false if completed_at is less than 1 week ago' do
+      @todo_item = build(:todo_item, completed_at: 6.days.ago)
+
+      expect(@todo_item).not_to be_old
+    end
+
+    it 'returns false if completed_at is nil' do
+      @todo_item = build(:todo_item)
+
+      expect(@todo_item).not_to be_old
+    end
+  end
+
   describe 'uncomplete' do
     it 'sets the completed_at date to nil' do
       @todo_item = build(:completed_todo_item)

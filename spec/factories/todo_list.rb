@@ -27,11 +27,15 @@ FactoryGirl.define do
       transient do
         items_count 5
         completed_items_count 0
+        old_items_count 0
       end
 
       after(:create) do |list, evaluator|
-        create_list(:todo_item, (evaluator.items_count - evaluator.completed_items_count), todo_list: list)
+        create_list(:todo_item,
+                    (evaluator.items_count - evaluator.completed_items_count - evaluator.old_items_count),
+                    todo_list: list)
         create_list(:completed_todo_item, evaluator.completed_items_count, todo_list: list)
+        create_list(:old_todo_item, evaluator.old_items_count, todo_list: list)
       end
     end
   end

@@ -7,5 +7,9 @@ FactoryGirl.define do
     factory :completed_todo_item do
       completed_at 1.minute.ago
     end
+
+    factory :old_todo_item do
+      completed_at 1.month.ago
+    end
   end
 end
