@@ -23,6 +23,6 @@ class TodoList < ActiveRecord::Base
   end
 
   def items
-    todo_items.count
+    todo_items.size
   end
 end

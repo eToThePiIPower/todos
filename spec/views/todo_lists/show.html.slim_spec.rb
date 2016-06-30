@@ -8,7 +8,7 @@ RSpec.describe 'todo_lists/show.html.slim' do
 
   context 'when there are todo items' do
     it 'highlights completed todo items' do
-      @todo_list = create(:todo_list_with_items, items_count: 10, completed_items_count: 3)
+      @todo_list = build(:todo_list_with_items, items_count: 10, completed_items_count: 3)
       assign(:todo_list, @todo_list)
       assign(:todo_items, @todo_list.todo_items)
 
@@ -19,7 +19,7 @@ RSpec.describe 'todo_lists/show.html.slim' do
     end
 
     it 'mutes old todo items' do
-      @todo_list = create(:todo_list_with_items, items_count: 10, old_items_count: 3)
+      @todo_list = build(:todo_list_with_items, items_count: 10, old_items_count: 3)
       assign(:todo_list, @todo_list)
       assign(:todo_items, @todo_list.todo_items)
 

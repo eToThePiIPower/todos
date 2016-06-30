@@ -8,7 +8,7 @@ RSpec.describe 'todo_items/_show.html.slim' do
   end
   context 'when the item is complete' do
     it 'has an uncomplete button' do
-      @todo_item = build(:completed_todo_item)
+      @todo_item = build(:todo_item, :complete)
       @completed_at = @todo_item.completed_at
 
       render 'todo_items/show', item: @todo_item

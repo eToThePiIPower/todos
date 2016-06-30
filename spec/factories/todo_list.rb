@@ -3,26 +3,6 @@ FactoryGirl.define do
     name 'Valid List'
     description 'Valid Description'
 
-    factory :todo_list_with_uncompleted_items do
-      transient do
-        items_count 5
-      end
-
-      after(:create) do |list, evaluator|
-        create_list(:todo_item, evaluator.items_count, todo_list: list)
-      end
-    end
-
-    factory :todo_list_with_completed_items do
-      transient do
-        items_count 5
-      end
-
-      after(:create) do |list, evaluator|
-        create_list(:completed_todo_item, evaluator.items_count, todo_list: list)
-      end
-    end
-
     factory :todo_list_with_items do
       transient do
         items_count 5
@@ -30,12 +10,10 @@ FactoryGirl.define do
         old_items_count 0
       end
 
-      after(:create) do |list, evaluator|
-        create_list(:todo_item,
-                    (evaluator.items_count - evaluator.completed_items_count - evaluator.old_items_count),
-                    todo_list: list)
-        create_list(:completed_todo_item, evaluator.completed_items_count, todo_list: list)
-        create_list(:old_todo_item, evaluator.old_items_count, todo_list: list)
+      todo_items do
+        build_list(:todo_item, items_count - completed_items_count - old_items_count) +
+          build_list(:todo_item, completed_items_count, :complete) +
+          build_list(:todo_item, old_items_count, :old)
       end
     end
   end

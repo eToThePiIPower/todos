@@ -69,7 +69,7 @@ RSpec.describe TodoItem, type: :model do
 
   describe 'uncomplete' do
     it 'sets the completed_at date to nil' do
-      @todo_item = build(:completed_todo_item)
+      @todo_item = build(:todo_item, :complete)
 
       @todo_item.uncomplete!
 

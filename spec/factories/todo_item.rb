@@ -4,11 +4,11 @@ FactoryGirl.define do
 
     name 'Do Something Awesome'
 
-    factory :completed_todo_item do
+    trait :complete do
       completed_at 1.minute.ago
     end
 
-    factory :old_todo_item do
+    trait :old do
       completed_at 1.month.ago
     end
   end
