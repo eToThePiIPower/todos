@@ -47,26 +47,6 @@ RSpec.describe TodoItem, type: :model do
     end
   end
 
-  describe 'old?' do
-    it 'returns true if completed_at is more than 1 week ago' do
-      @todo_item = build(:todo_item, completed_at: 8.days.ago)
-
-      expect(@todo_item).to be_old
-    end
-
-    it 'returns false if completed_at is less than 1 week ago' do
-      @todo_item = build(:todo_item, completed_at: 6.days.ago)
-
-      expect(@todo_item).not_to be_old
-    end
-
-    it 'returns false if completed_at is nil' do
-      @todo_item = build(:todo_item)
-
-      expect(@todo_item).not_to be_old
-    end
-  end
-
   describe 'uncomplete' do
     it 'sets the completed_at date to nil' do
       @todo_item = build(:todo_item, :complete)
@@ -74,6 +54,65 @@ RSpec.describe TodoItem, type: :model do
       @todo_item.uncomplete!
 
       expect(@todo_item.completed_at).to be_nil
+    end
+  end
+
+  # Time methods
+
+  describe 'overdue?' do
+    it 'returns false if complete? and due_at is in the past' do
+      @todo_item = build(:todo_item, completed_at: 1.day.ago, due_at: 2.days.ago)
+
+      expect(@todo_item.overdue?).to be false
+    end
+
+    it 'returns false if not complete? and due_at? is nil' do
+      @todo_item = build(:todo_item, completed_at: nil, due_at: nil)
+
+      expect(@todo_item.overdue?).to be false
+    end
+
+    it 'returns true if not complete? and due_at is in the past' do
+      @todo_item = build(:todo_item, completed_at: nil, due_at: 2.days.ago)
+
+      expect(@todo_item.overdue?).to be true
+    end
+
+    it 'returns false if not complete? and due_at is in the future' do
+      @todo_item = build(:todo_item, completed_at: nil, due_at: 2.days.from_now)
+
+      expect(@todo_item.overdue?).to be false
+    end
+  end
+
+  describe 'archived?' do
+    it 'returns true if completed_at is more than 1 week ago' do
+      @todo_item = build(:todo_item, completed_at: 8.days.ago)
+
+      expect(@todo_item).to be_archived
+    end
+
+    it 'returns false if completed_at is less than 1 week ago' do
+      @todo_item = build(:todo_item, completed_at: 6.days.ago)
+
+      expect(@todo_item).not_to be_archived
+    end
+
+    it 'returns false if completed_at is nil' do
+      @todo_item = build(:todo_item)
+
+      expect(@todo_item).not_to be_archived
+    end
+  end
+
+  # Content generators
+
+  describe '.tag_for_time' do
+    it 'returns a time.timeago element' do
+      @todo_item = build(:todo_item, due_at: 1.day.from_now)
+
+      expect(@todo_item.tag_for_time(:due)).to match '<span>Due </span>'
+      expect(@todo_item.tag_for_time(:due)).to match "datetime=\"#{@todo_item.due_at.iso8601}\""
     end
   end
 end

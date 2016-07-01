@@ -15,7 +15,8 @@
         ruby:
           todo_list_item_classes = ['list-group-item']
           todo_list_item_classes << (item.complete? ? 'todo-list-item-complete' : 'todo-list-item-incomplete')
-          todo_list_item_classes << 'todo-list-item-old' if item.old?
+          todo_list_item_classes << 'todo-list-item-old' if item.archived?
+          todo_list_item_classes << 'todo-list-item-overdue' if item.overdue?
         li[class=todo_list_item_classes id=item.id]
           = render 'todo_items/show', item: item
 

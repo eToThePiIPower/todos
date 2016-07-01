@@ -7,6 +7,6 @@
     .form-group
       = f.label :due_at, 'Due At', class: 'control-label'
       = f.datetime_local_field :due_at, class: 'form-control',
-          value: 1.days.from_now.to_date.strftime('%Y-%m-%dT%T')
+          value: 1.day.from_now.to_date.strftime('%Y-%m-%dT%T')
     .form-group
       = f.submit 'Add Item', class: 'btn btn-primary form-control'

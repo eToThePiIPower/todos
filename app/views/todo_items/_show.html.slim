@@ -1,14 +1,13 @@
 h4.list-group-item-heading
   = item.name
-p.list-group-item-text
-  - if item.complete?
-    ' Completed
-    time.timeago[datetime=item.completed_at.iso8601 shorttime=item.completed_at.strftime('%c %Z')]
-      = item.completed_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
-  - else
-    ' Created
-    time.timeago[datetime=item.created_at.iso8601 shorttime=item.created_at.strftime('%c %Z')]
-      = item.created_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
+- if item.complete?
+  p.list-group-item-text
+    = item.tag_for_time(:completed)
+- else
+  p.list-group-item-text
+    = item.tag_for_time(:due)
+  p.list-group-item-text
+    = item.tag_for_time(:created)
 .list-group-item-text.actions
   = link_to todo_list_todo_item_path(@todo_list, item),
       method: :delete,

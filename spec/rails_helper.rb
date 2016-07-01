@@ -12,6 +12,9 @@ require 'support/login_helpers'
 require 'support/macros'
 Dir[File.dirname(__FILE__) + '/support/matchers/*.rb'].each { |f| require f }
 
+# Because some models use it and need to be tested
+include ActionView::Helpers::TagHelper
+
 require 'simplecov'
 SimpleCov.start do
   add_filter '/spec/'

@@ -28,5 +28,18 @@ RSpec.describe 'todo_lists/show.html.slim' do
       expect(rendered).to have_css('li.todo-list-item-complete.todo-list-item-old', count: 3)
       expect(rendered).to have_css('li.todo-list-item-incomplete', count: 7)
     end
+
+    it 'flags overdue todo items' do
+      @todo_list = build(:todo_list_with_items, items_count: 10)
+      @todo_items = @todo_list.todo_items
+      @todo_items[0..2].each { |i| i.due_at = 1.day.ago }
+      assign(:todo_list, @todo_list)
+      assign(:todo_items, @todo_items)
+
+      render
+
+      expect(rendered).to have_css('li.todo-list-item-overdue', count: 3)
+      expect(rendered).to have_css('li.todo-list-item-incomplete', count: 10)
+    end
   end
 end

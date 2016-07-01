@@ -49,6 +49,9 @@
 }
 .todo-list-item-incomplete {
 }
+.todo-list-item-overdue {
+  @extend .list-group-item-danger;
+}
 @include list-group-item-variant(muted, mix($state-success-bg, white, 25%), mix($state-success-text, white, 25%));
 .todo-list-item-old {
   @extend .list-group-item-muted

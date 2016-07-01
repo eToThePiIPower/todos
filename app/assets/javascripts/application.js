@@ -20,6 +20,7 @@
 //= require_tree .
 
 $(document).ready(function() {
+  $.timeago.settings.allowFuture = true;
   $("time.timeago").timeago();
 });
 
