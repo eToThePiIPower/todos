@@ -7,12 +7,14 @@ class TodoItem < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { minimum: 3 }
 
-  scope :priority, -> { order("
-    CASE WHEN completed_at IS NULL AND due_at < CURRENT_DATE + INTERVAL '7 days' THEN (1, due_at) END ASC,
-    CASE WHEN completed_at IS NULL AND due_at IS NULL THEN (2, due_at) END ASC,
-    CASE WHEN completed_at IS NULL THEN (3, due_at) END ASC,
-    CASE WHEN completed_at IS NOT NULL THEN (5, completed_at) END DESC
-  ")}
+  scope :priority, lambda {
+    order("
+      CASE WHEN completed_at IS NULL AND due_at < CURRENT_DATE + INTERVAL '7 days' THEN (1, due_at) END ASC,
+      CASE WHEN completed_at IS NULL AND due_at IS NULL THEN (2, due_at) END ASC,
+      CASE WHEN completed_at IS NULL THEN (3, due_at) END ASC,
+      CASE WHEN completed_at IS NOT NULL THEN (5, completed_at) END DESC
+    ")
+  }
 
   # Completion methods
 

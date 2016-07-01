@@ -41,7 +41,7 @@ RSpec.describe TodoListsController, type: :controller do
     end
   end
 
-  describe 'POST #update' do
+  describe 'PUT #update' do
     context 'when the owner is logged in' do
       before do
         @user = create(:user)

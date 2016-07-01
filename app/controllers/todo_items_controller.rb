@@ -1,6 +1,6 @@
 class TodoItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:destroy, :create, :complete, :uncomplete]
-  before_action :authorize_ownership!, only: [:destroy, :complete, :uncomplete]
+  before_action :authenticate_user!, only: [:destroy, :create, :complete, :uncomplete, :update]
+  before_action :authorize_ownership!, only: [:destroy, :complete, :uncomplete, :update]
   before_action :authorize_ownership_of_list!, only: :create
 
   def create
@@ -12,6 +12,15 @@ class TodoItemsController < ApplicationController
       flash[:error] = 'Error adding item.'
     end
     redirect_to @todo_list
+  end
+
+  def update
+    if @todo_item.update(todo_item_params)
+      flash[:notice] = 'Todo Item successfully updated.'
+    else
+      flash[:error] = 'Validation errors.'
+    end
+    redirect_to @todo_item.todo_list
   end
 
   def destroy
@@ -54,6 +63,6 @@ class TodoItemsController < ApplicationController
   end
 
   def todo_item_params
-    params.require(:todo_item).permit([:name, :due_at])
+    params.require(:todo_item).permit(:name, :due_at)
   end
 end

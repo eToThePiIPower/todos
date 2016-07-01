@@ -124,7 +124,66 @@ RSpec.describe TodoItemsController, type: :controller do
     end
   end
 
-  context 'PUT #complete' do
+  describe 'PUT #update' do
+    before do
+      @todo_item = create(:todo_item, todo_list: @todo_list)
+    end
+
+    context 'when the user owns the item' do
+      before do
+        sign_in @owner
+      end
+
+      context 'with valid params' do
+        it 'updates the todo item' do
+          put :update, id: @todo_item, todo_list_id: @todo_list,
+                       todo_item: { name: 'New Name Here' }
+          @todo_item.reload
+
+          expect(flash[:notice]).to match(/^Todo Item successfully updated./)
+          expect(response).to redirect_to @todo_list
+          expect(@todo_item.name).to eq 'New Name Here'
+        end
+      end
+
+      context 'with invalid params' do
+        it 'returns and error' do
+          put :update, id: @todo_item, todo_list_id: @todo_list,
+                       todo_item: { name: '' }
+          @todo_item.reload
+
+          expect(flash[:error]).to match(/^Validation errors./)
+          expect(response).to redirect_to @todo_list
+        end
+      end
+    end
+
+    context 'when the user does not own the containing list' do
+      it 'does not update the item' do
+        sign_in @other_user
+
+        put :update, id: @todo_item, todo_list_id: @todo_list,
+                     todo_list: { name: 'New Name Here' }
+        @todo_item.reload
+
+        expect(@todo_item.name).not_to eq 'New Name Here'
+        expect_it_to_return_an_authorization_error
+      end
+    end
+
+    context 'when the user is not logged in' do
+      it 'does not update the item' do
+        put :update, id: @todo_item, todo_list_id: @todo_list,
+                     todo_list: { name: 'New Name Here' }
+        @todo_item.reload
+
+        expect(@todo_item.name).not_to eq 'New Name Here'
+        expect_it_to_require_the_user_be_signed_in
+      end
+    end
+  end
+
+  describe 'PUT #complete' do
     before do
       @todo_item = create(:todo_item, todo_list: @todo_list)
     end
@@ -163,7 +222,7 @@ RSpec.describe TodoItemsController, type: :controller do
     end
   end
 
-  context 'PUT #uncomplete' do
+  describe 'PUT #uncomplete' do
     before do
       @todo_item = create(:todo_item, :complete, todo_list: @todo_list)
     end
