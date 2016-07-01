@@ -14,7 +14,7 @@ class TodoListsController < ApplicationController
   end
 
   def show
-    @todo_items = @todo_list.todo_items
+    @todo_items = @todo_list.todo_items.priority
     @todo_item = TodoItem.new
   end
 
