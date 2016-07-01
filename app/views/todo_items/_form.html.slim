@@ -6,7 +6,7 @@
       = f.text_field :name, class: 'form-control', placeholder: 'Item'
     .form-group
       = f.label :due_at, 'Due At', class: 'control-label'
-      = f.datetime_local_field :due_at, class: 'form-control',
-          value: 1.day.from_now.to_date.strftime('%Y-%m-%dT%T')
+      = f.datetime_local_field :due_at, class: 'form-control', step: 900,
+          value: 25.hours.from_now.beginning_of_hour.in_time_zone('America/New_York').strftime('%Y-%m-%dT%H:%M')
     .form-group
       = f.submit 'Add Item', class: 'btn btn-primary form-control'

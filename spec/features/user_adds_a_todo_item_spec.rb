@@ -9,7 +9,7 @@ feature 'User adds a todo item' do
     visit todo_list_path @todo_list
 
     fill_in 'New Item', with: 'My Newest Task'
-    fill_in 'Due At', with: 1.day.from_now.strftime('%Y-%m-%dT%T')
+    fill_in 'Due At', with: 1.day.from_now.in_time_zone('America/New_York').strftime('%Y-%m-%dT%T')
     click_button 'Add Item'
 
     expect(page).to have_content 'Item successfully added'

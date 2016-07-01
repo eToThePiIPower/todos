@@ -44,15 +44,64 @@
   }
 }
 
+@include list-group-item-variant(muted, mix($state-success-bg, white, 25%),
+                                        mix($state-success-text, white, 25%));
+@mixin reset-modals {
+  .modal {
+    color: initial;
+  }
+}
+
+.todo-list-item {
+  padding-left: 32px;
+  .todo-item-edit-button {
+    font-size: 75%;
+    margin-left: 0.5em;
+  }
+  h4 {
+    display: inline;
+  }
+  a,a:hover {
+    color: initial;
+  }
+}
+
+.completion-toggle-box {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  i {
+    font-size: 200%;
+  }
+}
+
 .todo-list-item-complete {
   @extend .list-group-item-success;
+  @include reset-modals;
+  h4 {
+    text-decoration: line-through;
+  }
+  a,a:hover {
+    color: $state-success-text;
+  }
 }
 .todo-list-item-incomplete {
 }
 .todo-list-item-overdue {
   @extend .list-group-item-danger;
+  @include reset-modals;
+  a,a:hover {
+    color: $state-danger-text;
+  }
 }
-@include list-group-item-variant(muted, mix($state-success-bg, white, 25%), mix($state-success-text, white, 25%));
+.todo-list-item-due-now {
+  @extend .list-group-item-warning;
+  @include reset-modals;
+  a,a:hover {
+    color: $state-warning-text;
+  }
+}
 .todo-list-item-old {
-  @extend .list-group-item-muted
+  @extend .list-group-item-muted;
+  @include reset-modals;
 }

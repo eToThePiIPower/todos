@@ -22,6 +22,18 @@
 $(document).ready(function() {
   $.timeago.settings.allowFuture = true;
   $("time.timeago").timeago();
+
+  $('.clear-field-link').click(function() {
+    var formid = $(this).attr('data-formid');
+    var fieldid = $(this).attr('data-fieldid');
+    $(formid + ' ' + fieldid)[0].value = null;
+  });
+  $('.reset-field-link').click(function() {
+    var formid = $(this).attr('data-formid');
+    var fieldid = $(this).attr('data-fieldid');
+    var resetValue = $(this).attr('data-reset-value');
+    $(formid + ' ' + fieldid)[0].value = resetValue;
+  });
 });
 
 /* global dataConfirmModal */

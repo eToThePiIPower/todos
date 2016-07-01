@@ -1,0 +1,27 @@
+.modal.type-primary.fade.in[tabindex="-1" id="modal-for-item-#{item.id}"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-hidden="true"] ×
+        h4 Edit Item
+      .modal-body
+        = form_for [@todo_list, item] do |f|
+          fieldset
+            .form-group
+              = f.label :name, 'Item Name', class: 'control-label'
+              = f.text_field :name, class: 'form-control', placeholder: 'Item'
+            .form-group
+              = f.label :due_at, 'Due At', class: 'control-label'
+              '
+              a.clear-field-link[data-formid="#modal-for-item-#{item.id}"
+                                 data-fieldid='#todo_item_due_at'] clear
+              a.reset-field-link[data-formid="#modal-for-item-#{item.id}"
+                                 data-fieldid='#todo_item_due_at'
+                                 data-reset-value="#{item.due_at_in_user_zone}"] reset
+              = f.datetime_local_field :due_at, class: 'form-control', step: 900,
+                                                value: item.due_at_in_user_zone
+            .form-group
+              = f.submit 'Add Item', class: 'btn btn-primary form-control'
+
+      .modal-footer
+        | Don't Panic!

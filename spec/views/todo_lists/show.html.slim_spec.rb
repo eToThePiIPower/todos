@@ -4,6 +4,7 @@ RSpec.describe 'todo_lists/show.html.slim' do
   before do
     stub_template 'todo_items/_form.html.slim' => 'add item form goes here'
     stub_template 'todo_items/_show.html.slim' => 'item description goes here'
+    stub_template 'todo_items/_modal_form.html.slim' => 'add item form goes here'
   end
 
   context 'when there are todo items' do

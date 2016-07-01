@@ -1,3 +1,5 @@
+include ActionView::Helpers::TagHelper
+
 class TodoItem < ActiveRecord::Base
   belongs_to :todo_list
   delegate :user, to: :todo_list
@@ -36,8 +38,20 @@ class TodoItem < ActiveRecord::Base
     self[:completed_at].nil? && !self[:due_at].nil? && self[:due_at] < Time.current
   end
 
+  def due_now?
+    !complete? && !overdue? && !self[:due_at].nil? && self[:due_at] < 1.day.from_now
+  end
+
   def archived?
     !self[:completed_at].nil? && self[:completed_at] < 1.week.ago
+  end
+
+  def due_at_in_user_zone
+    if due_at.nil?
+      nil
+    else
+      due_at.in_time_zone('America/New_York').strftime('%Y-%m-%dT%H:%M')
+    end
   end
 
   # Tag content

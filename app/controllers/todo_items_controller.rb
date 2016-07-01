@@ -63,6 +63,7 @@ class TodoItemsController < ApplicationController
   end
 
   def todo_item_params
+    Time.zone = 'America/New_York'
     params.require(:todo_item).permit(:name, :due_at)
   end
 end
