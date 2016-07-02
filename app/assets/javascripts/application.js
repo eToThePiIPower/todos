@@ -34,6 +34,14 @@ $(document).ready(function() {
     var resetValue = $(this).attr('data-reset-value');
     $(formid + ' ' + fieldid)[0].value = resetValue;
   });
+  $(".alert-dismissable.alert-success")
+    .fadeTo(2000, 500).slideUp(500, function() {
+      $(".alert-dismissable.alert-success").alert('close');
+    });
+  $(".alert-dismissable.alert-danger")
+    .fadeTo(5000, 500).slideUp(500, function() {
+      $(".alert-dismissable.alert-danger").alert('close');
+    });
 });
 
 /* global dataConfirmModal */
