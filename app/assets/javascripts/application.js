@@ -26,7 +26,7 @@ $(document).ready(function() {
   $('.clear-field-link').click(function() {
     var formid = $(this).attr('data-formid');
     var fieldid = $(this).attr('data-fieldid');
-    $(formid + ' ' + fieldid)[0].value = null;
+    $(formid + ' ' + fieldid)[0].value = '';
   });
   $('.reset-field-link').click(function() {
     var formid = $(this).attr('data-formid');
