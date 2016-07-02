@@ -26,21 +26,5 @@
                 class: 'btn btn-link btn-xs') do
               i.fa.fa-remove[aria-hidden='true']
               span.sr-only Delete this item
-          .progress
-            ruby:
-              progress_bar_type =
-                if list.percent_complete < 25
-                  'progress-bar-danger'
-                elsif list.percent_complete < 50
-                  'progress-bar-warning'
-                elsif list.percent_complete < 75
-                  'progress-bar-success'
-                elsif list.percent_complete < 100
-                  'progress-bar-info'
-                else
-                'progress-bar-info progress-bar-striped active'
-                end
-            div[role='progressbar'
-              aria-valuenow="#{list.percent_complete.to_i}" aria-valuemin="0" aria-valuemax="100"
-              class="progress-bar #{progress_bar_type}"
-              style="width:#{list.percent_complete}%;"]
+          .progress.progress-mini
+            = render 'shared/progressbar', percent: list.percent_complete

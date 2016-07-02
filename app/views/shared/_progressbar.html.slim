@@ -1,0 +1,19 @@
+ruby:
+  show_percent ||= false
+  progress_bar_type =
+    if percent < 25
+      'progress-bar-danger'
+    elsif percent < 50
+      'progress-bar-warning'
+    elsif percent < 75
+      'progress-bar-success'
+    elsif percent < 100
+      'progress-bar-info'
+    else
+    'progress-bar-info progress-bar-striped active'
+    end
+div[role='progressbar'
+  aria-valuenow="#{percent.to_i}" aria-valuemin="0" aria-valuemax="100"
+  class="progress-bar #{progress_bar_type}"
+  style="width:#{percent}%;"]
+  = "#{percent.to_i}%" if show_percent
