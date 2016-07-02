@@ -17,8 +17,8 @@
     color: $state-success-text;
   }
   &.alert-danger {
-    background-color: rgba($state-warning-bg, 0.95);
-    color: $state-warning-text;
+    background-color: rgba($state-danger-bg, 0.95);
+    color: $state-danger-text;
   }
 }
 
