@@ -13,7 +13,7 @@
     ul.list-group#todo-lists-group
       - @todo_lists.each do |list|
         li.list-group-item.list-group-item-progress[id=list.id]
-          h4.list-group-item-header = link_to(list.name, list)
+          h4.list-group-item-header = link_to(list.name, list, class: 'no-widows')
           p.list-group-item-text
             = list.description
           .list-group-item-text.actions

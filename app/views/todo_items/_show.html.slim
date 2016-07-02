@@ -1,5 +1,5 @@
 .list-group-item-heading
-  h4 = item.name
+  h4.no-widows = item.name
   = link_to 'edit', "\#modal-for-item-#{item.id}",
             data: { toggle: 'modal', keyboard: true },
             class: 'todo-item-edit-button'
