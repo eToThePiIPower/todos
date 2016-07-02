@@ -47,9 +47,7 @@ class TodoItem < ActiveRecord::Base
   end
 
   def due_at_in_user_zone
-    if due_at.nil?
-      nil
-    else
+    unless due_at.nil?
       due_at.in_time_zone('America/New_York').strftime('%Y-%m-%dT%H:%M')
     end
   end
