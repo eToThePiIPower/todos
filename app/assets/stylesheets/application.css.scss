@@ -7,6 +7,21 @@
 @import "flex-list";
 @import "modals";
 
+.alert {
+  opacity: 0.95;
+  position: absolute;
+  left: 1em;
+  right: 1em;
+  &.alert-success {
+    background-color: rgba($state-success-bg, 0.95);
+    color: $state-success-text;
+  }
+  &.alert-danger {
+    background-color: rgba($state-warning-bg, 0.95);
+    color: $state-warning-text;
+  }
+}
+
 .jumbotron {
   background-color: $brand-primary;
   color: $body-bg;
@@ -49,7 +64,15 @@
 @mixin reset-modals {
   .modal {
     color: initial;
+    a {
+      color: initial;
+    }
   }
+}
+
+.clear-field-link, .reset-field-link {
+  padding: 0 0.5em;
+  font-size: 75%;
 }
 
 .todo-list-item {
