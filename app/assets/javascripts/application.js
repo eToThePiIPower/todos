@@ -20,7 +20,41 @@
 //= require_tree .
 
 $(document).ready(function() {
-  $("time.timeago").timeago();
+  $.timeago.settings.allowFuture = true;
+  $('time.timeago').timeago();
+
+  $('.clear-field-link').click(function() {
+    var formid = $(this).attr('data-formid');
+    var fieldid = $(this).attr('data-fieldid');
+    $(formid + ' ' + fieldid)[0].value = '';
+  });
+  $('.reset-field-link').click(function() {
+    var formid = $(this).attr('data-formid');
+    var fieldid = $(this).attr('data-fieldid');
+    var resetValue = $(this).attr('data-reset-value');
+    $(formid + ' ' + fieldid)[0].value = resetValue;
+  });
+
+  // Auto-closing alerts
+  $('.alert-dismissable.alert-success')
+    .fadeTo(2000, 500).slideUp(500, function() {
+      $('.alert-dismissable.alert-success').alert('close');
+    });
+  $('.alert-dismissable.alert-danger')
+    .fadeTo(5000, 500).slideUp(500, function() {
+      $('.alert-dismissable.alert-danger').alert('close');
+    });
+
+  // Prevent widows on page and item titles
+  $('.no-widows').each(function() {
+    var wordArray = $(this).text().split(' ');
+    var length = wordArray.length;
+    if (wordArray.length > 1) {
+      wordArray[length - 2] += '&nbsp;' + wordArray[length - 1];
+      wordArray.pop();
+      $(this).html(wordArray.join(' '));
+    }
+  });
 });
 
 /* global dataConfirmModal */

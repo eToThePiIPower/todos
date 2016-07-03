@@ -12,8 +12,8 @@
   - else
     ul.list-group#todo-lists-group
       - @todo_lists.each do |list|
-        li.list-group-item[id=list.id]
-          h4.list-group-item-header = link_to(list.name, list)
+        li.list-group-item.list-group-item-progress[id=list.id]
+          h4.list-group-item-header = link_to(list.name, list, class: 'no-widows')
           p.list-group-item-text
             = list.description
           .list-group-item-text.actions
@@ -26,3 +26,5 @@
                 class: 'btn btn-link btn-xs') do
               i.fa.fa-remove[aria-hidden='true']
               span.sr-only Delete this item
+          .progress.progress-mini
+            = render 'shared/progressbar', percent: list.percent_complete

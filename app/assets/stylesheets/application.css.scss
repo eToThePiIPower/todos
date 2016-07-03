@@ -7,6 +7,40 @@
 @import "flex-list";
 @import "modals";
 
+.progress {
+  padding: 0;
+  &.progress-mini {
+    height: 10px;
+  }
+}
+.list-group-item-progress {
+  padding-bottom: 20px;
+  .progress {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    border: none;
+    height: 10px;
+  }
+}
+
+.alert {
+  opacity: 0.95;
+  position: absolute;
+  left: 1em;
+  right: 1em;
+  &.alert-success {
+    background-color: rgba($state-success-bg, 0.95);
+    color: $state-success-text;
+  }
+  &.alert-danger {
+    background-color: rgba($state-danger-bg, 0.95);
+    color: $state-danger-text;
+  }
+}
+
 .jumbotron {
   background-color: $brand-primary;
   color: $body-bg;
@@ -44,12 +78,72 @@
   }
 }
 
+@include list-group-item-variant(muted, mix($state-success-bg, white, 25%),
+                                        mix($state-success-text, white, 25%));
+@mixin reset-modals {
+  .modal {
+    color: initial;
+    a {
+      color: initial;
+    }
+  }
+}
+
+.clear-field-link, .reset-field-link {
+  padding: 0 0.5em;
+  font-size: 75%;
+}
+
+.todo-list-item {
+  padding-left: 32px;
+  .todo-item-edit-button {
+    font-size: 75%;
+    margin-left: 0.5em;
+  }
+  h4 {
+    display: inline;
+  }
+  a,a:hover {
+    color: initial;
+  }
+}
+
+.completion-toggle-box {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  i {
+    font-size: 200%;
+  }
+}
+
 .todo-list-item-complete {
   @extend .list-group-item-success;
+  @include reset-modals;
+  h4 {
+    text-decoration: line-through;
+  }
+  a,a:hover {
+    color: $state-success-text;
+  }
 }
 .todo-list-item-incomplete {
 }
-@include list-group-item-variant(muted, mix($state-success-bg, white, 25%), mix($state-success-text, white, 25%));
+.todo-list-item-overdue {
+  @extend .list-group-item-danger;
+  @include reset-modals;
+  a,a:hover {
+    color: $state-danger-text;
+  }
+}
+.todo-list-item-due-now {
+  @extend .list-group-item-warning;
+  @include reset-modals;
+  a,a:hover {
+    color: $state-warning-text;
+  }
+}
 .todo-list-item-old {
-  @extend .list-group-item-muted
+  @extend .list-group-item-muted;
+  @include reset-modals;
 }

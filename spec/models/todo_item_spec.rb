@@ -47,26 +47,6 @@ RSpec.describe TodoItem, type: :model do
     end
   end
 
-  describe 'old?' do
-    it 'returns true if completed_at is more than 1 week ago' do
-      @todo_item = build(:todo_item, completed_at: 8.days.ago)
-
-      expect(@todo_item).to be_old
-    end
-
-    it 'returns false if completed_at is less than 1 week ago' do
-      @todo_item = build(:todo_item, completed_at: 6.days.ago)
-
-      expect(@todo_item).not_to be_old
-    end
-
-    it 'returns false if completed_at is nil' do
-      @todo_item = build(:todo_item)
-
-      expect(@todo_item).not_to be_old
-    end
-  end
-
   describe 'uncomplete' do
     it 'sets the completed_at date to nil' do
       @todo_item = build(:todo_item, :complete)
@@ -74,6 +54,121 @@ RSpec.describe TodoItem, type: :model do
       @todo_item.uncomplete!
 
       expect(@todo_item.completed_at).to be_nil
+    end
+  end
+
+  # Time methods
+  describe '.due_at_in_user_zone' do
+    it 'when the due date is set' do
+      @due_datetime = 1.day.from_now
+      @todo_item = build(:todo_item, due_at: @due_datetime)
+
+      expect(@todo_item.due_at_in_user_zone).to eq @due_datetime.in_time_zone('America/New_York').strftime('%Y-%m-%dT%H:%M')
+    end
+
+    it 'when the due date is nil' do
+      @todo_item = build(:todo_item)
+
+      expect(@todo_item.due_at_in_user_zone).to be nil
+    end
+  end
+
+  describe '.due_now?' do
+    it 'returns false if the item is complete' do
+      @todo_item = build(:todo_item, completed_at: 1.day.ago, due_at: 1.hour.from_now)
+
+      expect(@todo_item.due_now?).to be false
+    end
+
+    it 'returns false if the due_at date is more than 1 day in the future' do
+      @todo_item = build(:todo_item, due_at: 2.days.from_now)
+
+      expect(@todo_item.due_now?).to be false
+    end
+
+    it 'returns false if there is no due_at date' do
+      @todo_item = build(:todo_item)
+
+      expect(@todo_item.due_now?).to be false
+    end
+
+    it 'returns false if the item is overdue' do
+      @todo_item = build(:todo_item, due_at: 1.hour.ago)
+
+      expect(@todo_item.due_now?).to be false
+    end
+
+    it 'returns true if the item is not not complete and the due_at date is in the past' do
+      @todo_item = build(:todo_item, due_at: 1.hour.from_now)
+
+      expect(@todo_item.due_now?).to be true
+    end
+  end
+
+  describe '.overdue?' do
+    it 'returns false if complete? and due_at is in the past' do
+      @todo_item = build(:todo_item, completed_at: 1.day.ago, due_at: 2.days.ago)
+
+      expect(@todo_item.overdue?).to be false
+    end
+
+    it 'returns false if not complete? and due_at? is nil' do
+      @todo_item = build(:todo_item, completed_at: nil, due_at: nil)
+
+      expect(@todo_item.overdue?).to be false
+    end
+
+    it 'returns true if not complete? and due_at is in the past' do
+      @todo_item = build(:todo_item, completed_at: nil, due_at: 2.days.ago)
+
+      expect(@todo_item.overdue?).to be true
+    end
+
+    it 'returns false if not complete? and due_at is in the future' do
+      @todo_item = build(:todo_item, completed_at: nil, due_at: 2.days.from_now)
+
+      expect(@todo_item.overdue?).to be false
+    end
+  end
+
+  describe '.archived?' do
+    it 'returns true if completed_at is more than 1 week ago' do
+      @todo_item = build(:todo_item, completed_at: 8.days.ago)
+
+      expect(@todo_item).to be_archived
+    end
+
+    it 'returns false if completed_at is less than 1 week ago' do
+      @todo_item = build(:todo_item, completed_at: 6.days.ago)
+
+      expect(@todo_item).not_to be_archived
+    end
+
+    it 'returns false if completed_at is nil' do
+      @todo_item = build(:todo_item)
+
+      expect(@todo_item).not_to be_archived
+    end
+  end
+
+  # Content generators
+
+  describe '.tag_for_time' do
+    it 'returns a time.timeago element' do
+      @todo_item = build(:todo_item, due_at: 1.day.from_now)
+
+      expect(@todo_item.tag_for_time(:due)).to match '<span>Due </span>'
+      expect(@todo_item.tag_for_time(:due)).to match '<time '
+      expect(@todo_item.tag_for_time(:due)).to match 'class="timeago"'
+      expect(@todo_item.tag_for_time(:due)).to match @todo_item.due_at.strftime('%A, %B %e %Y @%l:%M%P %Z')
+      expect(@todo_item.tag_for_time(:due)).to match "datetime=\"#{@todo_item.due_at.iso8601}\""
+      expect(@todo_item.tag_for_time(:due)).to match "shorttime=\"#{@todo_item.due_at.strftime('%c %Z')}\""
+    end
+
+    it 'returns a default value if the time field is not set' do
+      @todo_item = build(:todo_item)
+
+      expect(@todo_item.tag_for_time(:due)).to match '<span>No due time set</span>'
     end
   end
 end

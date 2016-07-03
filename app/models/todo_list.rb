@@ -25,4 +25,13 @@ class TodoList < ActiveRecord::Base
   def items
     todo_items.size
   end
+
+  def percent_complete
+    total = todo_items.count
+    if total.equal?(0)
+      0
+    else
+      (100.0 * todo_items.where('completed_at < ?', Time.current).size / total).to_int
+    end
+  end
 end
