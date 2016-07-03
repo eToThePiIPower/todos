@@ -16,14 +16,6 @@
   - else
     ul.list-group#todo-items-group
       - @todo_items.each do |item|
-
-        ruby:
-          todo_list_item_classes = ['list-group-item todo-list-item']
-          todo_list_item_classes << (item.complete? ? 'todo-list-item-complete' : 'todo-list-item-incomplete')
-          todo_list_item_classes << 'todo-list-item-old' if item.archived?
-          todo_list_item_classes << 'todo-list-item-overdue' if item.overdue?
-          todo_list_item_classes << 'todo-list-item-due-now' if item.due_now?
-        li[class=todo_list_item_classes id=item.id]
-          = render 'todo_items/show', item: item
+        = render 'todo_items/show', item: item
 
   = render 'todo_items/form'
