@@ -1,0 +1,4 @@
+.container
+  ul.alerts
+    - flash.each do |type, msg|
+      = render 'layouts/alert', type: type, msg: msg

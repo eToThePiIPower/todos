@@ -6,6 +6,7 @@
 @import "buttons";
 @import "flex-list";
 @import "modals";
+@import "alerts";
 
 .progress {
   padding: 0;
@@ -23,21 +24,6 @@
     margin: 0;
     border: none;
     height: 10px;
-  }
-}
-
-.alert {
-  opacity: 0.95;
-  position: absolute;
-  left: 1em;
-  right: 1em;
-  &.alert-success {
-    background-color: rgba($state-success-bg, 0.95);
-    color: $state-success-text;
-  }
-  &.alert-danger {
-    background-color: rgba($state-danger-bg, 0.95);
-    color: $state-danger-text;
   }
 }
 
