@@ -1,0 +1,19 @@
+ruby:
+  alert_classes =
+    case type
+    when 'notice', 'success'
+      'alert-success alert-autoclose-fast'
+    when 'alert', 'danger', 'error'
+      'alert-danger alert-autoclose-slow'
+    when 'warning'
+      'alert-warning'
+    when 'info'
+      'alert-info'
+    end
+
+li.alert.alert-dismissable[class=alert_classes]
+  button.close[type="button" data-dismiss="alert" aria-hidden="true"]
+    | &times
+  strong = type.to_s.capitalize
+  '
+  = msg

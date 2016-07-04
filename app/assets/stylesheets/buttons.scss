@@ -1,36 +1,46 @@
 .btn-outline {
+  transition: all .5s;
   background-color: transparent;
   color: inherit;
-  transition: all 0.5s;
+
   &.btn-primary {
     color: $brand-primary;
   }
+
   &.btn-success {
     color: $brand-success;
   }
+
   &.btn-default {
     color: $gray;
   }
+
   &.btn-info {
     color: $brand-info;
   }
+
   &.btn-warning {
     color: $brand-warning;
   }
+
   &.btn-danger {
     color: $brand-danger;
   }
 
-  &.btn-default, &.btn-primary, &.btn-success,
-  &.btn-info, &.btn-warning, &.btn-danger {
+  &.btn-danger,
+  &.btn-default,
+  &.btn-info,
+  &.btn-primary,
+  &.btn-success,
+  &.btn-warning {
     &:hover {
-      color: #fff;
+      color: $btn-warning-color;
     }
   }
 }
 
 .jumbotron {
   .btn-outline {
-      color: #fff;
+    color: $navbar-inverse-color;
   }
 }

@@ -1,32 +1,56 @@
 .modal {
-  &.type-primary {
-    .modal-header {
-      background-color: $brand-primary;
-      color: #fff;
-    }
-  }
-  &.type-success {
-    .modal-header {
-      background-color: $brand-success;
-      color: #fff;
-    }
-  }
-  &.type-info {
-    .modal-header {
-      background-color: $brand-info;
-      color: #fff;
-    }
-  }
-  &.type-warning {
-    .modal-header {
-      background-color: $brand-warning;
-      color: #fff;
-    }
-  }
   &.type-danger {
+    .btn-modal-default {
+      @extend .btn-danger;
+    }
+
     .modal-header {
       background-color: $brand-danger;
-      color: #fff;
+      color: $btn-danger-color;
+    }
+  }
+
+  &.type-info {
+    .btn-modal-default {
+      @extend .btn-info;
+    }
+
+    .modal-header {
+      background-color: $brand-info;
+      color: $btn-info-color;
+    }
+  }
+
+  &.type-primary {
+    .btn-modal-default {
+      @extend .btn-primary;
+    }
+
+    .modal-header {
+      background-color: $brand-primary;
+      color: $btn-primary-color;
+    }
+  }
+
+  &.type-success {
+    .btn-modal-default {
+      @extend .btn-success;
+    }
+
+    .modal-header {
+      background-color: $brand-success;
+      color: $btn-success-color;
+    }
+  }
+
+  &.type-warning {
+    .btn-modal-default {
+      @extend .btn-warning;
+    }
+
+    .modal-header {
+      background-color: $brand-warning;
+      color: $btn-warning-color;
     }
   }
 }

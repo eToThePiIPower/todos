@@ -35,10 +35,13 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4.2'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'slim_lint'
+  gem 'scss_lint', '~> 0.48', require: false
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rubocop', '~> 0.40.0'
+  gem 'pry-rails'
+  gem 'mutant-rspec'
 end

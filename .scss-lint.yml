@@ -1,0 +1,17 @@
+scss_files: 'app/assets/stylesheets'
+
+linters:
+  ColorKeyword:
+    enabled: false
+  ColorVariable:
+    enabled: false
+  IdSelector:
+    enabled: false
+  PlaceholderInExtend:
+    enabled: false
+  PropertySortOrder:
+    order: smacss
+  SelectorFormat:
+    ignored_names: ['field_with_errors']
+  VendorPrefix:
+    enabled: false
