@@ -59,5 +59,6 @@ $(document).ready(function() {
 
 /* global dataConfirmModal */
 dataConfirmModal.setDefaults({
-  modalClass: 'type-danger'
+  modalClass: 'type-danger',
+  commitClass: 'btn-modal-default'
 });
