@@ -1,0 +1,21 @@
+.progress {
+  padding: 0;
+
+  &.progress-mini {
+    height: 10px;
+  }
+}
+
+.list-group-item-progress {
+  padding-bottom: 20px;
+
+  .progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 10px;
+    margin: 0;
+    border: 0;
+  }
+}

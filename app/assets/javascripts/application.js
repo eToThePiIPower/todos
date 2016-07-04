@@ -36,11 +36,11 @@ $(document).ready(function() {
   });
 
   // Auto-closing alerts
-  $('.alert-dismissable.alert-success')
+  $('.alert-dismissable.alert-autoclose-fast')
     .fadeTo(2000, 500).slideUp(500, function() {
       $('.alert-dismissable.alert-success').alert('close');
     });
-  $('.alert-dismissable.alert-danger')
+  $('.alert-dismissable.alert-autoclose-slow')
     .fadeTo(5000, 500).slideUp(500, function() {
       $('.alert-dismissable.alert-danger').alert('close');
     });
@@ -59,5 +59,6 @@ $(document).ready(function() {
 
 /* global dataConfirmModal */
 dataConfirmModal.setDefaults({
-  modalClass: 'type-danger'
+  modalClass: 'type-danger',
+  commitClass: 'btn-modal-default'
 });

@@ -53,8 +53,20 @@ namespace :lint do
     end
   end
 
+  desc 'Run scss-lint against stylesheets'
+  task scss: :environment do
+    puts ''
+    sh "bundle exec scss-lint #{Rails.root}/app/assets/stylesheets" do |ok|
+      if ok
+        puts "\e[32mscss-lint completed: no offences\e[0m"
+      else
+        abort "\e[31mscss-lint found offences\e[0m"
+      end
+    end
+  end
+
   desc 'Run all linters'
-  task all: [:rubocop, :slim, :eslint, :remark]
+  task all: [:rubocop, :slim, :scss, :eslint, :remark]
 end
 
 task :lint do

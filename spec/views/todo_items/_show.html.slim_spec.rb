@@ -7,6 +7,7 @@ RSpec.describe 'todo_items/_show.html.slim' do
     allow(view).to receive(:todo_list_todo_item_path).and_return('deletion link')
     stub_template 'todo_items/_modal_form.html.slim' => 'add item form goes here'
   end
+
   context 'when the item is complete' do
     it 'has an uncomplete button' do
       @todo_item = build(:todo_item, :complete)

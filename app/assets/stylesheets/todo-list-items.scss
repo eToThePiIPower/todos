@@ -1,0 +1,73 @@
+// Place all the styles related to the todo_item controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin todo-list-item-variant($state, $base, $color) {
+  .todo-list-item {
+    &.todo-list-item-#{$state} {
+      @extend .list-group-item-#{$base};
+      @include reset-modals;
+
+      a,
+      a:hover {
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin reset-modals {
+  .modal {
+    color: initial;
+
+    a {
+      color: initial;
+    }
+  }
+}
+
+@include todo-list-item-variant(complete, success, $state-success-text);
+@include todo-list-item-variant(due-now, warning, $state-warning-text);
+@include todo-list-item-variant(overdue, danger, $state-danger-text);
+
+@include list-group-item-variant(muted, $state-success-muted-bg, $state-success-muted-text);
+@include todo-list-item-variant(old, muted, $state-success-text);
+
+.clear-field-link,
+.reset-field-link {
+  padding: 0 .25em;
+  font-size: 75%;
+}
+
+.todo-list-item {
+  padding-left: 32px;
+
+  .todo-item-edit-button {
+    margin-left: .5em;
+    font-size: 75%;
+  }
+
+  h4 {
+    display: inline;
+  }
+
+  a,
+  a:hover {
+    color: initial;
+  }
+}
+
+.completion-toggle-box {
+  position: absolute;
+  top: 10px;
+  left: 0;
+
+  i {
+    font-size: 200%;
+  }
+}
+
+.todo-list-item-complete {
+  h4 {
+    text-decoration: line-through;
+  }
+}

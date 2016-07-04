@@ -3,8 +3,12 @@ require 'rails_helper'
 RSpec.describe 'todo_lists/show.html.slim' do
   before do
     stub_template 'todo_items/_form.html.slim' => 'add item form goes here'
-    stub_template 'todo_items/_show.html.slim' => 'item description goes here'
+    # stub_template 'todo_items/_show.html.slim' => 'item description goes here'
     stub_template 'todo_items/_modal_form.html.slim' => 'add item form goes here'
+
+    allow(view).to receive(:todo_list_complete_path).and_return('complete link')
+    allow(view).to receive(:todo_list_uncomplete_path).and_return('uncomplete link')
+    allow(view).to receive(:todo_list_todo_item_path).and_return('deletion link')
   end
 
   context 'when there are todo items' do

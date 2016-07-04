@@ -1,0 +1,50 @@
+.alerts {
+  position: fixed;
+  top: 5vw;
+  right: 10vw;
+  left: 10vw;
+  padding: 0;
+  list-style: none;
+  opacity: .975;
+  z-index: 1000;
+
+  .alert {
+    position: relative;
+    padding-left: 3em;
+
+    &::before {
+      position: absolute;
+      top: .5em;
+      left: .5em;
+      font-family: FontAwesome;
+      font-size: 150%;
+    }
+  }
+
+  .alert-success {
+    background-color: $state-success-bg;
+    color: $state-success-text;
+
+    &::before {
+      content: '\f00c';
+    }
+  }
+
+  .alert-warning {
+    background-color: $state-warning-bg;
+    color: $state-warning-text;
+
+    &::before {
+      content: '\f071';
+    }
+  }
+
+  .alert-danger {
+    background-color: $state-danger-bg;
+    color: $state-danger-text;
+
+    &::before {
+      content: '\f1e2';
+    }
+  }
+}
