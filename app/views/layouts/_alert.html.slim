@@ -1,14 +1,14 @@
 ruby:
   alert_classes =
-    case type
+    case type.to_s
     when 'notice', 'success'
       'alert-success alert-autoclose-fast'
     when 'alert', 'danger', 'error'
       'alert-danger alert-autoclose-slow'
     when 'warning'
-      'alert-warning'
+      'alert-warning alert-autoclose-fast'
     when 'info'
-      'alert-info'
+      'alert-info alert-autoclose-fast'
     end
 
 li.alert.alert-dismissable[class=alert_classes]

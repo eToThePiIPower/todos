@@ -286,7 +286,7 @@ RSpec.describe TodoItemsController, type: :controller do
       it 'expects the list to still exist' do
         sign_in @owner
 
-        delete :uncomplete, id: @todo_item, todo_list_id: @todo_list, format: :json
+        delete :uncomplete, id: @todo_item, todo_list_id: @todo_list, format: :js
 
         expect(@todo_item).not_to be_nil
         expect(@todo_list).not_to be_nil

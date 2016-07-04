@@ -40,11 +40,11 @@ function bindHandlers() {
   // Auto-closing alerts
   $('.alert-dismissable.alert-autoclose-fast')
     .fadeTo(2000, 500).slideUp(500, function() {
-      $('.alert-dismissable.alert-success').alert('close');
+      $(this).remove();
     });
   $('.alert-dismissable.alert-autoclose-slow')
     .fadeTo(5000, 500).slideUp(500, function() {
-      $('.alert-dismissable.alert-danger').alert('close');
+      $(this).remove();
     });
 
   // Prevent widows on page and item titles

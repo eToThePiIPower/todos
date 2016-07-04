@@ -5,7 +5,7 @@ ruby:
   todo_list_item_classes << 'todo-list-item-overdue' if item.overdue?
   todo_list_item_classes << 'todo-list-item-due-now' if item.due_now?
 
-li[class=todo_list_item_classes id=item.id]
+li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
   .list-group-item-heading
     h4.no-widows = item.name
     = link_to 'edit', "\#modal-for-item-#{item.id}",
@@ -23,6 +23,7 @@ li[class=todo_list_item_classes id=item.id]
   .completion-toggle-box
     - if item.complete?
       = link_to todo_list_uncomplete_path(@todo_list, item),
+          remote: true,
           id: "todo-item-toggle-#{item.id}",
           method: :delete,
           class: 'btn btn-xs btn-link' do
@@ -30,6 +31,7 @@ li[class=todo_list_item_classes id=item.id]
         span.sr-only Uncomplete this item
     - else
       = link_to todo_list_complete_path(@todo_list, item),
+          remote: true,
           id: "todo-item-toggle-#{item.id}",
           method: :put,
           class: 'btn btn-xs btn-link' do
