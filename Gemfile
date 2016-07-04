@@ -42,4 +42,6 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rubocop', '~> 0.40.0'
+  gem 'pry-rails'
+  gem 'mutant-rspec'
 end
