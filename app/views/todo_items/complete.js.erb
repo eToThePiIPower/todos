@@ -1,0 +1,12 @@
+$('#todo-items-group #<%= @todo_item.id %>').remove();
+$('#todo-items-group').append("<%= j render 'todo_items/show', item: @todo_item %>");
+
+$('#alerts').append("<%= j render 'layouts/alert', type: :info, msg: 'Item marked complete' %>");
+$('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;")
+$('#todo-items-group li').sort(sortPriority).appendTo('#todo-items-group')
+$('.progress-bar')
+  .removeClass('progress-bar-danger')
+  .removeClass('progress-bar-warning')
+  .removeClass('progress-bar-success')
+  .removeClass('progress-bar-info')
+  .addClass('<%= @todo_list.progress_bar_type %>')

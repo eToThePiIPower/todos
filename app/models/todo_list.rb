@@ -34,4 +34,19 @@ class TodoList < ActiveRecord::Base
       (100.0 * todo_items.where('completed_at < ?', Time.current).size / total).to_int
     end
   end
+
+  # Helpers
+  def progress_bar_type
+    if percent_complete < 25
+      'progress-bar-danger'
+    elsif percent_complete < 50
+      'progress-bar-warning'
+    elsif percent_complete < 75
+      'progress-bar-success'
+    elsif percent_complete < 100
+      'progress-bar-info'
+    else
+      'progress-bar-info progress-bar-striped active'
+    end
+  end
 end

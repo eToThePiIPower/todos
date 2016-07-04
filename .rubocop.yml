@@ -10,6 +10,7 @@ Rails:
 Metrics/MethodLength:
   Exclude:
     - db/migrate/**/*.rb
+    - app/models/todo_list.rb
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: 'comma'
 Style/TrailingCommaInArguments:
