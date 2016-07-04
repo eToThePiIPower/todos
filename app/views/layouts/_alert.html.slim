@@ -2,9 +2,9 @@ ruby:
   alert_classes =
     case type
     when 'notice', 'success'
-      'alert-success alert-autoclose-slow'
+      'alert-success alert-autoclose-fast'
     when 'alert', 'danger', 'error'
-      'alert-danger alert-autoclose-fast'
+      'alert-danger alert-autoclose-slow'
     when 'warning'
       'alert-warning'
     when 'info'
