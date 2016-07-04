@@ -19,10 +19,12 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
-  $.timeago.settings.allowFuture = true;
+/** Handlers and functions that need to get bound both on
+document.ready() and document.ajaxComplete() */
+function bindHandlers() {
   $('time.timeago').timeago();
 
+  // The clear and reset buttons on edit modals
   $('.clear-field-link').click(function() {
     var formid = $(this).attr('data-formid');
     var fieldid = $(this).attr('data-fieldid');
@@ -55,6 +57,15 @@ $(document).ready(function() {
       $(this).html(wordArray.join(' '));
     }
   });
+}
+
+$(document).ajaxComplete(function() {
+  bindHandlers();
+});
+
+$(document).ready(function() {
+  $.timeago.settings.allowFuture = true;
+  bindHandlers();
 });
 
 /* global dataConfirmModal */
@@ -62,3 +73,16 @@ dataConfirmModal.setDefaults({
   modalClass: 'type-danger',
   commitClass: 'btn-modal-default'
 });
+
+// Sort functions we want made available elsewhere, such as AJAX responses
+/* eslint-disable no-unused-vars */
+
+/**
+ * Sorts using the default sortorder in the item's data attributes
+ * @param {Object} a - The first DOM object with a data-sortorder attribute
+ * @param {Object} b - The second DOM object with a data-sortorder attribute
+ * @return {integer} - Either 1 or -1
+ */
+function sortPriority(a, b) {
+  return ($(b).data('sortorder')) < ($(a).data('sortorder')) ? 1 : -1;
+}
