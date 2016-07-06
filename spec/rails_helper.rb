@@ -8,12 +8,15 @@ require 'rspec/rails'
 require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_girl'
-require 'support/login_helpers'
 require 'support/macros'
 Dir[File.dirname(__FILE__) + '/support/matchers/*.rb'].each { |f| require f }
 
 # Because some models use it and need to be tested
 include ActionView::Helpers::TagHelper
+
+# Warden to login users for feature specs
+include Warden::Test::Helpers
+Warden.test_mode!
 
 require 'simplecov'
 SimpleCov.start do
@@ -75,7 +78,6 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   # Include custom spec helpers
-  config.include LoginHelpers
   config.include Macros
 end
 

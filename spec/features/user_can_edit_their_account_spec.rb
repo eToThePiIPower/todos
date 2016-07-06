@@ -1,7 +1,10 @@
 feature 'User can edit their account' do
   before do
     @user = create(:user)
-    login_as(@user)
+    login_as(@user, scope: :user)
+  end
+  after do
+    Warden.test_reset!
   end
 
   scenario 'they change their email address' do
