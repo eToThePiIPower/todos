@@ -1,7 +1,6 @@
-$('#todo-items-group #<%= @todo_item.id %>').remove();
-$('#todo-items-group').append("<%= j render 'todo_items/show', item: @todo_item %>");
-
-$('#alerts').append("<%= j render 'layouts/alert', type: :info, msg: 'Item marked complete' %>");
+$('#modal-for-item-<%= @todo_item.id %> .close').click();
+$('#todo-items-group li#<%= @todo_item.id %>').replaceWith("<%= j render 'todo_items/show', item: @todo_item %>");
+$('#alerts').append("<%= j render 'layouts/alert', type: :success, msg: 'Item updated successfully' %>");
 $('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;").attr('aria-valuenow', '<%= @todo_list.percent_complete %>');
 $('#todo-items-group li').sort(sortPriority).appendTo('#todo-items-group');
 $('.progress-bar')
@@ -10,3 +9,4 @@ $('.progress-bar')
   .removeClass('progress-bar-success')
   .removeClass('progress-bar-info')
   .addClass('<%= @todo_list.progress_bar_type %>');
+$('.modal-backdrop').remove();

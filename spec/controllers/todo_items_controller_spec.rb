@@ -55,42 +55,82 @@ RSpec.describe TodoItemsController, type: :controller do
 
           expect(TodoItem.first.due_at.zone).to eq 'EST'
         end
+
+        it 'responds to AJAX requests' do
+          expect do
+            xhr :post, :create, todo_item: @todo_item, todo_list_id: @todo_list
+          end.to change(TodoItem, :count).by(1)
+
+          expect(response.status).to be 200
+        end
       end
 
       context 'with invalid params' do
+        before do
+          @todo_item = attributes_for(:todo_item, name: '')
+        end
+
         it 'renders the parent todo list with errors' do
           expect do
-            post :create, todo_item: attributes_for(:todo_item, name: ''),
-                          todo_list_id: @todo_list
+            post :create, todo_item: @todo_item, todo_list_id: @todo_list
           end.not_to change(TodoItem, :count)
 
           expect(flash[:error]).to match(/^Error adding item./)
           expect(response).to redirect_to @todo_list
         end
+
+        it 'responds to AJAX requests with an error and noop' do
+          expect do
+            xhr :post, :create, todo_item: @todo_item, todo_list_id: @todo_list
+          end.not_to change(TodoItem, :count)
+
+          expect(response.status).to be 422
+        end
       end
     end
 
     context 'when the user does not own the list' do
-      it 'does nothing and returns an error' do
+      before do
+        @todo_item = attributes_for(:todo_item)
         sign_in @other_user
+      end
 
+      it 'does nothing and returns an error' do
         expect do
-          post :create, todo_list_id: @todo_list,
-                        todo_item: attributes_for(:todo_item)
+          post :create, todo_list_id: @todo_list, todo_item: @todo_item
         end.not_to change(TodoItem, :count)
 
         expect_it_to_return_an_authorization_error
       end
+
+      it 'responds to AJAX requests with an error and noop' do
+        expect do
+          xhr :post, :create, todo_item: @todo_item, todo_list_id: @todo_list
+        end.not_to change(TodoItem, :count)
+
+        expect(response.status).to be 401
+      end
     end
 
     context 'when the user is not signed in' do
+      before do
+        @todo_item = attributes_for(:todo_item)
+      end
+
       it 'does nothing and returns an error' do
         expect do
-          post :create, todo_list_id: @todo_list,
-                        todo_item: attributes_for(:todo_item)
+          post :create, todo_list_id: @todo_list, todo_item: @todo_item
         end.not_to change(TodoItem, :count)
 
         expect_it_to_require_the_user_be_signed_in
+      end
+
+      it 'responds to AJAX requests with an error and noop' do
+        expect do
+          xhr :post, :create, todo_item: @todo_item, todo_list_id: @todo_list
+        end.not_to change(TodoItem, :count)
+
+        expect(response.status).to be 401
       end
     end
   end
@@ -123,6 +163,15 @@ RSpec.describe TodoItemsController, type: :controller do
           expect(response).to redirect_to @todo_list
           expect(response.status).to eq 303
         end
+
+        it 'responds to AJAX requests' do
+          xhr :put, :update, id: @todo_item, todo_list_id: @todo_list,
+                             todo_item: { name: 'New Name Here' }
+          @todo_item.reload
+
+          expect(@todo_item.name).to eq 'New Name Here'
+          expect(response.status).to be 200
+        end
       end
 
       context 'with invalid params' do
@@ -133,6 +182,15 @@ RSpec.describe TodoItemsController, type: :controller do
 
           expect(flash[:error]).to match(/^Validation errors./)
           expect(response).to redirect_to @todo_list
+        end
+
+        it 'responds to AJAX requests with an error and noop' do
+          xhr :put, :update, id: @todo_item, todo_list_id: @todo_list,
+                             todo_item: { name: '' }
+          @todo_item.reload
+
+          expect(@todo_item.name).not_to eq ''
+          expect(response.status).to be 422
         end
       end
     end
@@ -148,6 +206,15 @@ RSpec.describe TodoItemsController, type: :controller do
         expect(@todo_item.name).not_to eq 'New Name Here'
         expect_it_to_return_an_authorization_error
       end
+
+      it 'responds to AJAX requests with an error and noop' do
+        xhr :put, :update, id: @todo_item, todo_list_id: @todo_list,
+                           todo_item: { name: 'New Name Here' }
+        @todo_item.reload
+
+        expect(@todo_item.name).not_to eq 'New Name Here'
+        expect(response.status).to be 401
+      end
     end
 
     context 'when the user is not logged in' do
@@ -158,6 +225,15 @@ RSpec.describe TodoItemsController, type: :controller do
 
         expect(@todo_item.name).not_to eq 'New Name Here'
         expect_it_to_require_the_user_be_signed_in
+      end
+
+      it 'responds to AJAX requests with an error and noop' do
+        xhr :put, :update, id: @todo_item, todo_list_id: @todo_list,
+                           todo_item: { name: 'New Name Here' }
+        @todo_item.reload
+
+        expect(@todo_item.name).not_to eq 'New Name Here'
+        expect(response.status).to be 401
       end
     end
   end
@@ -186,6 +262,24 @@ RSpec.describe TodoItemsController, type: :controller do
         expect(response).to redirect_to @todo_list
         expect(response.status).to eq 303
       end
+
+      it 'responds to AJAX requests' do
+        sign_in @owner
+
+        expect do
+          xhr :delete, :destroy, id: @todo_item, todo_list_id: @todo_list
+        end.to change(TodoItem, :count).by(-1)
+
+        expect(response.status).to be 200
+      end
+
+      it 'does not delete the list' do
+        sign_in @owner
+
+        expect do
+          xhr :delete, :destroy, id: @todo_item, todo_list_id: @todo_list
+        end.not_to change(TodoList, :count)
+      end
     end
 
     context 'when the user does not own the containing list' do
@@ -198,6 +292,14 @@ RSpec.describe TodoItemsController, type: :controller do
 
         expect_it_to_return_an_authorization_error
       end
+
+      it 'responds to AJAX requests with an error and noop' do
+        expect do
+          xhr :delete, :destroy, id: @todo_item, todo_list_id: @todo_list
+        end.not_to change(TodoItem, :count)
+
+        expect(response.status).to be 401
+      end
     end
 
     context 'when the user is not logged in' do
@@ -207,6 +309,14 @@ RSpec.describe TodoItemsController, type: :controller do
         end.not_to change(TodoItem, :count)
 
         expect_it_to_require_the_user_be_signed_in
+      end
+
+      it 'responds to AJAX requests with an error and noop' do
+        expect do
+          xhr :delete, :destroy, id: @todo_item, todo_list_id: @todo_list
+        end.not_to change(TodoItem, :count)
+
+        expect(response.status).to be 401
       end
     end
   end
@@ -234,6 +344,16 @@ RSpec.describe TodoItemsController, type: :controller do
         expect(response).to redirect_to @todo_list
         expect(response.status).to eq 303
       end
+
+      it 'responds to AJAX requests' do
+        sign_in @owner
+
+        xhr :put, :complete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).to be_complete
+        expect(response.status).to be 200
+      end
     end
 
     context 'when the user does not own the containing list' do
@@ -246,6 +366,16 @@ RSpec.describe TodoItemsController, type: :controller do
         expect(@todo_item).not_to be_complete
         expect_it_to_return_an_authorization_error
       end
+
+      it 'responds to AJAX requests with an error and noop' do
+        sign_in @other_user
+
+        xhr :put, :complete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).not_to be_complete
+        expect(response.status).to be 401
+      end
     end
 
     context 'when the user is not logged in' do
@@ -255,6 +385,14 @@ RSpec.describe TodoItemsController, type: :controller do
 
         expect(@todo_item).not_to be_complete
         expect_it_to_require_the_user_be_signed_in
+      end
+
+      it 'responds to AJAX requests with an error and noop' do
+        xhr :put, :complete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).not_to be_complete
+        expect(response.status).to be 401
       end
     end
   end
@@ -291,6 +429,16 @@ RSpec.describe TodoItemsController, type: :controller do
         expect(@todo_item).not_to be_nil
         expect(@todo_list).not_to be_nil
       end
+
+      it 'responds to AJAX requests' do
+        sign_in @owner
+
+        xhr :delete, :uncomplete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).not_to be_complete
+        expect(response.status).to be 200
+      end
     end
 
     context 'when the user does not own the containing list' do
@@ -303,6 +451,16 @@ RSpec.describe TodoItemsController, type: :controller do
         expect(@todo_item).to be_complete
         expect_it_to_return_an_authorization_error
       end
+
+      it 'responds to AJAX requests with an error and noop' do
+        sign_in @other_user
+
+        xhr :delete, :uncomplete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).to be_complete
+        expect(response.status).to be 401
+      end
     end
 
     context 'when the user is not logged in' do
@@ -312,6 +470,14 @@ RSpec.describe TodoItemsController, type: :controller do
 
         expect(@todo_item).to be_complete
         expect_it_to_require_the_user_be_signed_in
+      end
+
+      it 'responds to AJAX requests with an error and noop' do
+        xhr :delete, :uncomplete, id: @todo_item, todo_list_id: @todo_list
+        @todo_item.reload
+
+        expect(@todo_item).to be_complete
+        expect(response.status).to be 401
       end
     end
   end
