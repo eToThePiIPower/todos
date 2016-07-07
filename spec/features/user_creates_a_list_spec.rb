@@ -1,8 +1,13 @@
 feature 'User creates a list' do
-  scenario 'they see the list form on the page' do
+  before do
     @user = create(:user)
-    login_as(@user)
+    login_as(@user, scope: :user)
+  end
+  after do
+    Warden.test_reset!
+  end
 
+  scenario 'they see the list form on the page' do
     visit new_todo_list_path
 
     fill_in 'Name', with: 'My List'

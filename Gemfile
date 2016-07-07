@@ -32,6 +32,8 @@ group :development, :test do
   gem 'capybara'
   gem 'dotenv-rails'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'launchy'
+  gem 'poltergeist'
   gem 'rspec-rails', '~> 3.4.2'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'slim_lint'

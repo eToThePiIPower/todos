@@ -151,6 +151,53 @@ RSpec.describe TodoItem, type: :model do
     end
   end
 
+  # Sort order functions
+
+  describe 'sort_order' do
+    context 'there is no due date' do
+      before do
+        @todo_item = build(:todo_item)
+      end
+
+      it 'returns with prefix 0' do
+        expect(@todo_item.sort_order).to match(/^0:/)
+      end
+
+      it 'returns with postfix 7.days.from_now in UTC in iso8601 form' do
+        expect(@todo_item.sort_order).to match(/:#{7.days.from_now.in_time_zone('UTC').iso8601}/)
+      end
+    end
+
+    context 'the item is incomplete' do
+      before do
+        @todo_item = build(:todo_item, due_at: 1.day.from_now)
+      end
+
+      it 'returns with prefix 0' do
+        expect(@todo_item.sort_order).to match(/^0:/)
+      end
+
+      it 'returns with postfix due_at in UTC in iso8601 form' do
+        expect(@todo_item.sort_order).to match(/:#{@todo_item.due_at.in_time_zone('UTC').iso8601}/)
+      end
+    end
+
+    context 'the item is complete' do
+      before do
+        @todo_item = build(:todo_item, completed_at: 1.day.ago)
+      end
+
+      it 'returns with prefix 1' do
+        expect(@todo_item.sort_order).to match(/^1:/)
+      end
+
+      # pending 'returns with the postfix seconds since completion' do
+      #   # Awaiting timecop
+      #   expect(@todo_item.sort_order).to match(/:#{Time.current - 1.day.ago}/)
+      # end
+    end
+  end
+
   # Content generators
 
   describe '.tag_for_time' do

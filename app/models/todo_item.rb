@@ -52,6 +52,18 @@ class TodoItem < ActiveRecord::Base
     end
   end
 
+  # Sorting functions
+  def sort_order
+    # Added to data-attributes to sort via jQuery
+    if complete?
+      "1:#{Time.current - completed_at}"
+    elsif due_at.nil?
+      "0:#{7.days.from_now.in_time_zone('UTC').iso8601}"
+    else
+      "0:#{due_at.in_time_zone('UTC').iso8601}"
+    end
+  end
+
   # Tag content
 
   def tag_for_time(time_field)

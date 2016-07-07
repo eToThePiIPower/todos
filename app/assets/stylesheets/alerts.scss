@@ -21,6 +21,15 @@
     }
   }
 
+  .alert-info {
+    background-color: $state-info-bg;
+    color: $state-info-text;
+
+    &::before {
+      content: '\f0fa';
+    }
+  }
+
   .alert-success {
     background-color: $state-success-bg;
     color: $state-success-text;
@@ -44,7 +53,7 @@
     color: $state-danger-text;
 
     &::before {
-      content: '\f1e2';
+      content: '\f057';
     }
   }
 }

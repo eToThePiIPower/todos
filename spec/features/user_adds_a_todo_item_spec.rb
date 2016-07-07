@@ -2,7 +2,10 @@ feature 'User adds a todo item' do
   before do
     @user = create(:user)
     @todo_list = @user.todo_lists.create(attributes_for(:todo_list))
-    login_as @user
+    login_as(@user, scope: :user)
+  end
+  after do
+    Warden.test_reset!
   end
 
   scenario 'they see the list on the page' do
