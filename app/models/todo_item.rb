@@ -9,6 +9,8 @@ class TodoItem < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { minimum: 3 }
 
+  validates :description, length: { maximum: 1024 }
+
   scope :priority, lambda {
     order("
       CASE WHEN completed_at IS NULL AND due_at < CURRENT_DATE + INTERVAL '7 days' THEN (1, due_at) END ASC,

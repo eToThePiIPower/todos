@@ -25,6 +25,8 @@ gem 'devise'
 
 gem 'codecov', require: false, group: :test
 
+gem 'redcarpet'
+
 gem 'rails_12factor', group: :production
 
 group :development, :test do

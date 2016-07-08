@@ -3,7 +3,7 @@ $('#todo-items-group').append("<%= j render 'todo_items/show', item: @todo_item 
 
 $('#alerts').append("<%= j render 'layouts/alert', type: :warning, msg: 'Item marked incomplete' %>");
 $('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;").attr('aria-valuenow', '<%= @todo_list.percent_complete %>');
-$('#todo-items-group li').sort(sortPriority).appendTo('#todo-items-group');
+$('#todo-items-group li.todo-list-item').sort(sortPriority).appendTo('#todo-items-group')
 $('.progress-bar')
   .removeClass('progress-bar-danger')
   .removeClass('progress-bar-warning')
