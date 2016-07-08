@@ -156,6 +156,14 @@ RSpec.describe TodoItemsController, type: :controller do
           expect(@todo_item.name).to eq 'New Name Here'
         end
 
+        it 'accepts an optional description' do
+          put :update, id: @todo_item, todo_list_id: @todo_list,
+                       todo_item: { description: 'This is the new description' }
+          @todo_item.reload
+
+          expect(@todo_item.description).to eq 'This is the new description'
+        end
+
         it 'redirects to the list with status 303' do
           put :update, id: @todo_item, todo_list_id: @todo_list,
                        todo_item: { name: 'New Name Here' }
