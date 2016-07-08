@@ -12,6 +12,8 @@ li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
               data: { toggle: 'modal', keyboard: true },
               class: 'todo-item-edit-button'
     = render 'todo_items/modal_form', item: item
+  .list-group-item-text.todo-item-description
+    = markdown(item.description)
   - if item.complete?
     p.list-group-item-text
       = item.tag_for_time(:completed)

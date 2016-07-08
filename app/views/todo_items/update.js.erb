@@ -2,7 +2,7 @@ $('#modal-for-item-<%= @todo_item.id %> .close').click();
 $('#todo-items-group li#<%= @todo_item.id %>').replaceWith("<%= j render 'todo_items/show', item: @todo_item %>");
 $('#alerts').append("<%= j render 'layouts/alert', type: :success, msg: 'Item updated successfully' %>");
 $('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;").attr('aria-valuenow', '<%= @todo_list.percent_complete %>');
-$('#todo-items-group li').sort(sortPriority).appendTo('#todo-items-group');
+$('#todo-items-group li.todo-list-item').sort(sortPriority).appendTo('#todo-items-group');
 $('.progress-bar')
   .removeClass('progress-bar-danger')
   .removeClass('progress-bar-warning')

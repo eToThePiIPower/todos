@@ -14,4 +14,13 @@ module ApplicationHelper
   def minimum_password_length
     @minimum_password_length ||= User.password_length.min
   end
+
+  def markdown(text)
+    markdown = Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML,
+      no_intro_emphasis: true,
+      disabled_indented_codeblocks: true,
+    )
+    markdown.render(text).html_safe unless text.nil?
+  end
 end

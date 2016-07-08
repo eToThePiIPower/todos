@@ -71,3 +71,33 @@
     text-decoration: line-through;
   }
 }
+
+.todo-item-description {
+  margin-bottom: 10px;
+  padding-bottom: 1em;
+  border-bottom: 1px solid;
+
+  h1 {
+    margin: 10.5px 0;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  h2 {
+    margin: 10.5px 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  h3 {
+    margin: 10.5px 0;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  h4 {
+    margin: 10.5px 0;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}

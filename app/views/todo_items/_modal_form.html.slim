@@ -21,6 +21,9 @@
               = f.datetime_local_field :due_at, class: 'form-control', step: 900,
                                                 value: item.due_at_in_user_zone
             .form-group
+              = f.label :description
+              = f.text_area :description, class: 'form-control'
+            .form-group
               = f.submit 'Update Item', class: 'btn btn-primary form-control'
 
       .modal-footer
