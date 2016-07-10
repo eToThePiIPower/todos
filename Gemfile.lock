@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/eToThePiIPower/data-confirm-modal.git
+  remote: https://github.com/eToThePiIPower/data-confirm-modal.git
   revision: 9f5cdfec6f0c855b76e165c14248eb7ca59b885d
   branch: feat/add-custom-data-modal-class-attribute-support
   specs:
