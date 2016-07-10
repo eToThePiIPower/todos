@@ -44,22 +44,27 @@ class TodoItemsController < ApplicationController
   def complete
     @todo_item.complete!
     @todo_item.save
-    respond_to do |f|
-      f.html { redirect_to @todo_item.todo_list, status: :see_other }
-      f.js
-    end
+    respond_with_redirect
   end
 
   def uncomplete
     @todo_item.uncomplete!
     @todo_item.save
-    respond_to do |f|
-      f.html { redirect_to @todo_item.todo_list, status: :see_other }
-      f.js
-    end
+    respond_with_redirect
   end
 
   private
+
+  def authorize_ownership!
+    @todo_item = current_user.todo_items.find_by_id(params.fetch(:id))
+    respond_with_401 && return if @todo_item.nil?
+    @todo_list = @todo_item.todo_list
+  end
+
+  def authorize_ownership_of_list!
+    @todo_list = current_user.todo_lists.find_by_id(params.fetch(:todo_list_id))
+    respond_with_401 if @todo_list.nil?
+  end
 
   def deny_updates_on_archived_items!
     if @todo_item.archived?
@@ -70,25 +75,17 @@ class TodoItemsController < ApplicationController
     end
   end
 
-  def authorize_ownership!
-    @todo_item = current_user.todo_items.find_by_id(params.fetch(:id))
-    if @todo_item.nil?
-      respond_to do |f|
-        f.html { redirect_to root_path, flash: { alert: 'You are not the owner of that item or the item does not exist.' } }
-        f.js { render status: 401 }
-      end
-    else
-      @todo_list = @todo_item.todo_list
+  def respond_with_401
+    respond_to do |f|
+      f.html { redirect_to root_path, flash: { alert: 'You are not the owner of that list or the list does not exist.' } }
+      f.js { render status: 401 }
     end
   end
 
-  def authorize_ownership_of_list!
-    @todo_list = current_user.todo_lists.find_by_id(params.fetch(:todo_list_id))
-    if @todo_list.nil?
-      respond_to do |f|
-        f.html { redirect_to root_path, flash: { alert: 'You are not the owner of that list or the list does not exist.' } }
-        f.js { render status: 401 }
-      end
+  def respond_with_redirect
+    respond_to do |f|
+      f.html { redirect_to @todo_item.todo_list, status: :see_other }
+      f.js
     end
   end
 
