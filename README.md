@@ -2,6 +2,7 @@
 
 [![Build Status][travis-badge]][travis-status]
 [![Code Coverage][codecov-badge]][codecov-status]
+[![Code Climate][codeclim-badge]][codeclim-status]
 
 A not-so-basic todos app
 
@@ -108,6 +109,10 @@ rake spec
 [codecov-badge]: https://img.shields.io/codecov/c/github/eToThePiIPower/todos.svg
 
 [codecov-status]: https://codecov.io/gh/eToThePiIPower/todos
+
+[codeclim-badge]: https://img.shields.io/codeclimate/github/eToThePiIPower/todos.svg
+
+[codeclim-status]: https://codeclimate.com/github/eToThePiIPower/todos
 
 [license]: LICENSE.txt
 
