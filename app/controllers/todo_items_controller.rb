@@ -2,7 +2,7 @@ class TodoItemsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy, :create, :complete, :uncomplete, :update]
   before_action :authorize_ownership!, only: [:destroy, :complete, :uncomplete, :update]
   before_action :authorize_ownership_of_list!, only: :create
-  before_action :deny_updates_on_archived_items!, only: :update
+  before_action :deny_updates_on_archived_items!, only: [:update, :uncomplete]
   respond_to :html, :js
 
   def create
@@ -64,8 +64,8 @@ class TodoItemsController < ApplicationController
   def deny_updates_on_archived_items!
     if @todo_item.archived?
       respond_to do |f|
-        f.html { redirect_to @todo_item.todo_list, status: :see_other, flash: { error: 'Item is archived' } }
-        f.js { render 'error', status: 422 }
+        f.html { redirect_to @todo_item.todo_list, status: :see_other, flash: { error: 'Archived items cannot be modified' } }
+        f.js { render 'error', status: 422, locals: { msg: 'Archived items cannot be modified' } }
       end
     end
   end

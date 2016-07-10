@@ -184,7 +184,18 @@ RSpec.describe TodoItemsController, type: :controller do
         it 'does not update after archival' do
           @archived_item = create(:todo_item, todo_list: @todo_list, completed_at: 2.weeks.ago, created_at: 3.weeks.ago)
           old_name = @archived_item.name
+
           put :update, id: @archived_item, todo_list_id: @todo_list, todo_item: { name: 'New Name Here' }
+          @archived_item.reload
+
+          expect(@archived_item.name).to eq old_name
+        end
+
+        it 'does not update after archival for AJAX request' do
+          @archived_item = create(:todo_item, todo_list: @todo_list, completed_at: 2.weeks.ago, created_at: 3.weeks.ago)
+          old_name = @archived_item.name
+
+          xhr :put, :update, id: @archived_item, todo_list_id: @todo_list, todo_item: { name: 'New Name Here' }
           @archived_item.reload
 
           expect(@archived_item.name).to eq old_name
@@ -455,6 +466,28 @@ RSpec.describe TodoItemsController, type: :controller do
 
         expect(@todo_item).not_to be_complete
         expect(response.status).to be 200
+        expect(@todo_item).not_to be_nil
+        expect(@todo_list).not_to be_nil
+      end
+
+      it 'does not update after archival' do
+        sign_in @owner
+        @archived_item = create(:todo_item, todo_list: @todo_list, completed_at: 2.weeks.ago, created_at: 3.weeks.ago)
+
+        delete :uncomplete, id: @archived_item, todo_list_id: @todo_list
+        @archived_item.reload
+
+        expect(@archived_item).to be_complete
+      end
+
+      it 'does not update after archival for AJAX request' do
+        sign_in @owner
+        @archived_item = create(:todo_item, todo_list: @todo_list, completed_at: 2.weeks.ago, created_at: 3.weeks.ago)
+
+        xhr :delete, :uncomplete, id: @archived_item, todo_list_id: @todo_list
+        @archived_item.reload
+
+        expect(@archived_item).to be_complete
       end
     end
 

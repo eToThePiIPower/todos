@@ -1,17 +1,18 @@
 ruby:
   todo_list_item_classes = ['list-group-item todo-list-item']
   todo_list_item_classes << (item.complete? ? 'todo-list-item-complete' : 'todo-list-item-incomplete')
-  todo_list_item_classes << 'todo-list-item-old' if item.archived?
+  todo_list_item_classes << 'todo-list-item-archived' if item.archived?
   todo_list_item_classes << 'todo-list-item-overdue' if item.overdue?
   todo_list_item_classes << 'todo-list-item-due-now' if item.due_now?
 
 li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
   .list-group-item-heading
     h4.no-widows = item.name
-    = link_to 'edit', "\#modal-for-item-#{item.id}",
-              data: { toggle: 'modal', keyboard: true },
-              class: 'todo-item-edit-button'
-    = render 'todo_items/modal_form', item: item
+    - unless item.archived?
+      = link_to 'edit', "\#modal-for-item-#{item.id}",
+                data: { toggle: 'modal', keyboard: true },
+                class: 'todo-item-edit-button'
+      = render 'todo_items/modal_form', item: item
   .list-group-item-text.todo-item-description
     = markdown(item.description)
   .list-item-times

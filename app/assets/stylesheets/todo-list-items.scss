@@ -30,7 +30,7 @@
 @include todo-list-item-variant(overdue, danger, $state-danger-text);
 
 @include list-group-item-variant(muted, $state-success-muted-bg, $state-success-muted-text);
-@include todo-list-item-variant(old, muted, $state-success-text);
+@include todo-list-item-variant(archived, muted, $state-success-muted-text);
 
 .clear-field-link,
 .reset-field-link {
