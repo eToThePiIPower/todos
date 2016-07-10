@@ -11,6 +11,10 @@
       a:hover {
         color: $color;
       }
+
+      .todo-item-description {
+        border-bottom: 1px solid mix($color, white, 50%);
+      }
     }
   }
 }
@@ -30,7 +34,7 @@
 @include todo-list-item-variant(overdue, danger, $state-danger-text);
 
 @include list-group-item-variant(muted, $state-success-muted-bg, $state-success-muted-text);
-@include todo-list-item-variant(old, muted, $state-success-text);
+@include todo-list-item-variant(archived, muted, $state-success-muted-text);
 
 .clear-field-link,
 .reset-field-link {
@@ -75,7 +79,7 @@
 .todo-item-description {
   margin-bottom: 10px;
   padding-bottom: 1em;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid lighten($gray-darker, 50%);
 
   h1 {
     margin: 10.5px 0;

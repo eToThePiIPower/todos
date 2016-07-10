@@ -1,1 +1,3 @@
-$('#alerts').append("<%= j render 'layouts/alert', type: :error, msg: 'There was an error adding the item' %>");
+$('#modal-for-item-<%= @todo_item.id %> .close').click();
+<% msg ||= 'There was an error' %>
+$('#alerts').append("<%= j render 'layouts/alert', type: :error, msg: msg %>");
