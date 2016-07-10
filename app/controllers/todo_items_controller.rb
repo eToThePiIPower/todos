@@ -2,6 +2,7 @@ class TodoItemsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy, :create, :complete, :uncomplete, :update]
   before_action :authorize_ownership!, only: [:destroy, :complete, :uncomplete, :update]
   before_action :authorize_ownership_of_list!, only: :create
+  before_action :deny_updates_on_archived_items!, only: :update
   respond_to :html, :js
 
   def create
@@ -59,6 +60,15 @@ class TodoItemsController < ApplicationController
   end
 
   private
+
+  def deny_updates_on_archived_items!
+    if @todo_item.archived?
+      respond_to do |f|
+        f.html { redirect_to @todo_item.todo_list, status: :see_other, flash: { error: 'Item is archived' } }
+        f.js { render 'error', status: 422 }
+      end
+    end
+  end
 
   def authorize_ownership!
     @todo_item = current_user.todo_items.find_by_id(params.fetch(:id))
