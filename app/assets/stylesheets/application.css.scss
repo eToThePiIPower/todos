@@ -8,60 +8,10 @@
 @import 'buttons';
 @import 'flex-list';
 @import 'modals';
+@import 'nav-with-tabs';
 @import 'progressbar';
+@import 'slide-up';
 @import 'todo-list-items';
-
-.slide-up-toggler {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: .5em;
-  background-color: #fff;
-  text-align: center;
-  box-shadow: 0 -6px 12px rgba(0, 0, 0, .175);
-  z-index: 10;
-}
-
-.slide-up-panel {
-  display: none;
-  position: fixed;
-  right: 0;
-  bottom: 28px;
-  left: 0;
-  padding: 1em;
-  background-color: #fff;
-  box-shadow: 0 -6px 12px rgba(0, 0, 0, .175);
-  z-index: 5;
-}
-
-@media (min-width: 768px) {
-  .slide-up-toggler,
-  .slide-up-panel {
-    width: 750px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
-@media (min-width: 992px) {
-  .slide-up-toggler,
-  .slide-up-panel {
-    width: 970px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
-@media (min-width: 1200px) {
-  .slide-up-toggler,
-  .slide-up-panel {
-    width: 1170px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
 
 .jumbotron {
   background-color: $brand-primary;
@@ -102,23 +52,5 @@
         content: attr(shorttime);
       }
     }
-  }
-}
-
-.panel.with-nav-tabs {
-  .panel-heading {
-    padding-bottom: 0;
-  }
-
-  .nav-tabs {
-    border-bottom: 0;
-
-    li:not(.active) a {
-      background-color: transparent;
-    }
-  }
-
-  .nav-justified {
-    margin-bottom: -1px;
   }
 }
