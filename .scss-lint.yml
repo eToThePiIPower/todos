@@ -11,6 +11,8 @@ linters:
     enabled: false
   PropertySortOrder:
     order: smacss
+  SelectorDepth:
+    max_depth: 4
   SelectorFormat:
     ignored_names: ['field_with_errors']
   VendorPrefix:

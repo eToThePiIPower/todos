@@ -10,33 +10,38 @@
 
   .panel.panel-default.with-nav-tabs
     .panel-heading
-      ul.nav.nav-tabs
+      ul.nav.nav-tabs[role='tablist']
         li.active
           a[data-toggle='tab' href='#todo-list-active'] Active Tasks
         li
-          a[data-toggle='tab' href='#todo-list-archived'] Archived Tasks
+          a[data-toggle='tab' href='#todo-list-archived'] Archives
         li.pull-right
           a[data-toggle='tab' href='#todo-list-settings']
             i.fa.fa-cog
-            | &nbsp; Settings
+            span.sr-only Settings
 
     .tab-content
 
       .tab-pane.fade.in.active#todo-list-active
         - if @todo_items.active.empty?
-          .well
+          .panel-body
             h2 This list is empty, or you have completed everything!
             p.lead Try adding an item below.
         - else
           ul.list-group#todo-items-group
             - @todo_items.active.each do |item|
               = render 'todo_items/show', item: item
-        .panel-body
+
+        button.slide-up-toggler.btn.btn-default
+          i.fa.fa-chevron-up
+          span &nbsp;Add an Item&nbsp;
+          i.fa.fa-chevron-up
+        .slide-up-panel
           = render 'todo_items/form'
 
       .tab-pane.fade#todo-list-archived
         - if @todo_items.archived.empty?
-          .well
+          .panel-body
             h2 There are no archived items!
             p.lead Items will appear here seven days after completion
         - else

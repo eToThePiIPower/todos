@@ -66,6 +66,10 @@ $(document).ajaxComplete(function() {
 $(document).ready(function() {
   $.timeago.settings.allowFuture = true;
   bindHandlers();
+
+  $('.slide-up-toggler').click(function() {
+    $('.slide-up-panel').slideToggle("slow");
+  });
 });
 
 /* global dataConfirmModal */

@@ -1,6 +1,6 @@
 require 'support/share_db_connection'
 
-feature 'User adds a todo item', js: true do
+feature 'User adds a todo item via AJAX', js: true do
   before do
     @user = create(:user)
     @todo_list = @user.todo_lists.create(attributes_for(:todo_list))
@@ -17,8 +17,11 @@ feature 'User adds a todo item', js: true do
 
     expect(page).to have_xpath("//div[@aria-valuenow='100']")
 
-    fill_in 'New Item', with: 'My Newest Task'
-    click_button 'Add Item'
+    click_on 'Add an Item'
+    within '#new_todo_item' do
+      fill_in 'New Item', with: 'My Newest Task'
+      click_button 'Add Item'
+    end
 
     expect(find('#alerts')).to have_content('Item added successfully')
     expect(page).to have_xpath("//div[@aria-valuenow='50']")
