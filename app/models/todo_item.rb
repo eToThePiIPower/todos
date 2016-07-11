@@ -11,6 +11,14 @@ class TodoItem < ActiveRecord::Base
 
   validates :description, length: { maximum: 1024 }
 
+  scope :active, lambda {
+    where('completed_at IS NULL OR completed_at >= ?', 7.days.ago)
+  }
+
+  scope :archived, lambda {
+    where('completed_at < ?', 7.days.ago)
+  }
+
   scope :priority, lambda {
     order("
       CASE WHEN completed_at IS NULL AND due_at < CURRENT_DATE + INTERVAL '7 days' THEN (1, due_at) END ASC,

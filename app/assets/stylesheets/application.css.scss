@@ -52,3 +52,10 @@
     }
   }
 }
+
+.panel.with-nav-tabs {
+  .panel-heading {
+    padding-bottom: 0;
+    border-bottom-color: transparent;
+  }
+}
