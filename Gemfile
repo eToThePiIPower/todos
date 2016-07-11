@@ -24,6 +24,7 @@ gem 'slim', '~> 3.0.7'
 gem 'devise'
 
 gem 'codecov', require: false, group: :test
+gem 'codeclimate-test-reporter', require: nil, group: :test
 
 gem 'redcarpet'
 
