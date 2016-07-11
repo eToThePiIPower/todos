@@ -13,7 +13,7 @@ RSpec.describe 'todo_lists/show.html.slim' do
 
   context 'when there are todo items' do
     it 'highlights completed todo items' do
-      @todo_list = build(:todo_list_with_items, items_count: 10, completed_items_count: 3)
+      @todo_list = create(:todo_list_with_items, items_count: 10, completed_items_count: 3)
       assign(:todo_list, @todo_list)
       assign(:todo_items, @todo_list.todo_items)
 
@@ -24,7 +24,7 @@ RSpec.describe 'todo_lists/show.html.slim' do
     end
 
     it 'mutes archived todo items' do
-      @todo_list = build(:todo_list_with_items, items_count: 10, old_items_count: 3)
+      @todo_list = create(:todo_list_with_items, items_count: 10, old_items_count: 3)
       assign(:todo_list, @todo_list)
       assign(:todo_items, @todo_list.todo_items)
 
@@ -35,9 +35,12 @@ RSpec.describe 'todo_lists/show.html.slim' do
     end
 
     it 'flags overdue todo items' do
-      @todo_list = build(:todo_list_with_items, items_count: 10)
+      @todo_list = create(:todo_list_with_items, items_count: 10)
       @todo_items = @todo_list.todo_items
-      @todo_items[0..2].each { |i| i.due_at = 1.day.ago }
+      @todo_items[0..2].each do |i|
+        i.due_at = 1.day.ago
+        i.save
+      end
       assign(:todo_list, @todo_list)
       assign(:todo_items, @todo_items)
 

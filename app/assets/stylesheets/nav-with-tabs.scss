@@ -1,0 +1,34 @@
+.panel.with-nav-tabs {
+  .panel-heading {
+    padding-bottom: 0;
+  }
+
+  .nav-tabs {
+    border-bottom: 0;
+
+    li:not(.active) a {
+      background-color: transparent;
+    }
+
+    .active.tab-danger a {
+      background: $state-danger-bg;
+      color: $state-danger-text;
+    }
+  }
+
+  .nav-justified {
+    margin-bottom: -1px;
+  }
+
+  .list-group {
+    margin-bottom: 0;
+
+    > li:first-child {
+      border-top: 0;
+    }
+  }
+}
+
+.panel.with-bottom-slider {
+  margin-bottom: 3em;
+}
