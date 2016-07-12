@@ -72,4 +72,62 @@ RSpec.describe TodoList, type: :model do
       expect(@todo_list.data_confirm).to eq @expected
     end
   end
+
+  describe '.progress_bar_type' do
+    it 'returns progress-bar-danger when percent_complete < 25' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(24)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-danger'
+    end
+
+    it 'returns progress-bar-warning when percent_complete < 50' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(25)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-warning'
+    end
+
+    it 'returns progress-bar-warning when percent_complete < 50' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(49)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-warning'
+    end
+
+    it 'returns progress-bar-success when percent_complete < 75' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(50)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-success'
+    end
+
+    it 'returns progress-bar-success when percent_complete < 75' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(74)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-success'
+    end
+
+    it 'returns progress-bar-info when percent_complete < 100' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(75)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-info'
+    end
+
+    it 'returns progress-bar-info when percent_complete < 100' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(99)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-info'
+    end
+
+    it 'returns progress-bar-info.active when percent_complete == 100' do
+      @todo_list = build(:todo_list)
+      allow(@todo_list).to receive(:percent_complete).and_return(100)
+
+      expect(@todo_list.progress_bar_type).to eq 'progress-bar-info progress-bar-striped active'
+    end
+  end
 end
