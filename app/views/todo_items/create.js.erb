@@ -8,3 +8,8 @@ $('.progress-bar')
   .removeClass('progress-bar-success')
   .removeClass('progress-bar-info')
   .addClass('<%= @todo_list.progress_bar_type %>')
+
+// Reload if we just added the first item
+<% if @todo_list.todo_items.active.size == 1 %>
+location.reload()
+<% end %>

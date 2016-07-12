@@ -30,6 +30,7 @@ feature 'User adds a todo item via AJAX', js: true do
   end
 
   scenario 'it keeps archived items in the archives' do
+    create(:todo_item, todo_list: @todo_list, created_at: 1.day.ago) # Ensure we aren't creating first active item
     create(:todo_item, todo_list: @todo_list, created_at: 9.days.ago, completed_at: 8.days.ago)
     visit todo_list_path @todo_list
 

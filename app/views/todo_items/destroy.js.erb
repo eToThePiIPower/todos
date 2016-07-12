@@ -8,3 +8,8 @@ $('.progress-bar')
   .removeClass('progress-bar-success')
   .removeClass('progress-bar-info')
   .addClass('<%= @todo_list.progress_bar_type %>');
+
+// Reload if we just removed the last item
+<% if @todo_list.todo_items.active.empty? %>
+location.reload()
+<% end %>
