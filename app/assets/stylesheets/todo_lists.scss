@@ -1,7 +1,8 @@
 // Place all the styles related to the todo_lists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#todo-items-group,
+#todo-items-active,
+#todo-items-archived,
 #todo-lists-group {
   .actions {
     position: absolute;

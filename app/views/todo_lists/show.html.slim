@@ -28,7 +28,7 @@
             h2 This list is empty, or you have completed everything!
             p.lead Try adding an item below.
         - else
-          ul.list-group#todo-items-group
+          ul.list-group#todo-items-active
             - @todo_items.active.each do |item|
               = render 'todo_items/show', item: item
 
@@ -45,7 +45,7 @@
             h2 There are no archived items!
             p.lead Items will appear here seven days after completion
         - else
-          ul.list-group#todo-items-group
+          ul.list-group#todo-items-archived
             - @todo_items.archived.each do |item|
               = render 'todo_items/show', item: item
 
