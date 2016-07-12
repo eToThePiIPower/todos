@@ -15,15 +15,16 @@ li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
       = render 'todo_items/modal_form', item: item
   .list-group-item-text.todo-item-description
     = markdown(item.description)
-  .list-item-times
-    - if item.complete?
-      p.list-group-item-text
-        = item.tag_for_time(:completed)
-    - else
-      p.list-group-item-text
-        = item.tag_for_time(:due)
-      p.list-group-item-text
-        = item.tag_for_time(:created)
+  .list-item-times.flex-list.flex-list-right
+    ul
+      - if item.complete?
+        li.list-group-item-text
+          = item.tag_for_time(:completed)
+      - else
+        li.list-group-item-text
+          = item.tag_for_time(:due)
+        li.list-group-item-text
+          = item.tag_for_time(:created)
   .completion-toggle-box
     - if item.complete?
       = link_to todo_list_uncomplete_path(@todo_list, item),
