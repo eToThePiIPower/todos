@@ -1,10 +1,15 @@
-$('#todo-items-group #<%= @todo_item.id%>').remove();
+$('#todo-items-active #<%= @todo_item.id%>').remove();
 $('#alerts').append("<%= j render 'layouts/alert', type: :success, msg: 'Item removed successfully' %>");
 $('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;").attr('aria-valuenow', '<%= @todo_list.percent_complete %>');
-$('#todo-items-group li').sort(sortPriority).appendTo('#todo-items-group');
+$('#todo-items-active li').sort(sortPriority).appendTo('#todo-items-active');
 $('.progress-bar')
   .removeClass('progress-bar-danger')
   .removeClass('progress-bar-warning')
   .removeClass('progress-bar-success')
   .removeClass('progress-bar-info')
   .addClass('<%= @todo_list.progress_bar_type %>');
+
+// Reload if we just removed the last item
+<% if @todo_list.todo_items.active.empty? %>
+location.reload()
+<% end %>

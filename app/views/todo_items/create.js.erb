@@ -1,10 +1,15 @@
-$('#todo-items-group').append("<%= j render 'todo_items/show', item: @todo_item %>");
+$('#todo-items-active').append("<%= j render 'todo_items/show', item: @todo_item %>");
 $('#alerts').append("<%= j render 'layouts/alert', type: :success, msg: 'Item added successfully' %>");
 $('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;").attr('aria-valuenow', '<%= @todo_list.percent_complete %>')
-$('#todo-items-group li.todo-list-item').sort(sortPriority).appendTo('#todo-items-group')
+$('#todo-items-active li.todo-list-item').sort(sortPriority).appendTo('#todo-items-active')
 $('.progress-bar')
   .removeClass('progress-bar-danger')
   .removeClass('progress-bar-warning')
   .removeClass('progress-bar-success')
   .removeClass('progress-bar-info')
   .addClass('<%= @todo_list.progress_bar_type %>')
+
+// Reload if we just added the first item
+<% if @todo_list.todo_items.active.size == 1 %>
+location.reload()
+<% end %>
