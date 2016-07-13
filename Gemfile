@@ -26,6 +26,7 @@ gem 'devise'
 gem 'codecov', require: false, group: :test
 gem 'codeclimate-test-reporter', require: nil, group: :test
 
+gem 'chronic_duration'
 gem 'redcarpet'
 
 gem 'rails_12factor', group: :production

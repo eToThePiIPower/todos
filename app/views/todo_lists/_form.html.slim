@@ -9,4 +9,8 @@
       = f.label :description, class: 'control-label'
       = f.text_field :description, class: 'form-control', placeholder: 'Description'
     .form-group
+      = f.label :default_due_at_duration, class: 'control-label'
+      = f.text_field :default_due_at_duration, class: 'form-control', placeholder: 'Example: "7 days"',
+        value: (ChronicDuration.output(@todo_list.default_due_at_duration) if @todo_list.default_due_at_duration.present?)
+    .form-group
       = f.submit class: 'btn btn-primary form-control'

@@ -1,6 +1,7 @@
 class TodoListsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :authorize_ownership!, only: [:edit, :update, :show, :destroy]
+  before_action :convert_durations, only: [:create, :update]
 
   def index
     if current_user
@@ -61,6 +62,11 @@ class TodoListsController < ApplicationController
   end
 
   def todo_list_params
-    params.require(:todo_list).permit(:name, :description)
+    params.require(:todo_list).permit(:name, :description, :default_due_at_duration)
+  end
+
+  def convert_durations
+    default_due_at_duration_unparsed = params[:todo_list][:default_due_at_duration]
+    params[:todo_list][:default_due_at_duration] = ChronicDuration.parse(default_due_at_duration_unparsed) if default_due_at_duration_unparsed
   end
 end

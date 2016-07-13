@@ -61,6 +61,9 @@ function bindHandlers() {
 
 $(document).ajaxComplete(function() {
   bindHandlers();
+
+  $('#todo-items-active li.todo-list-item')
+    .sort(sortPriority).appendTo('#todo-items-active');
 });
 
 $(document).ready(function() {
@@ -70,6 +73,9 @@ $(document).ready(function() {
   $('.slide-up-toggler').click(function() {
     $('.slide-up-panel').slideToggle("slow");
   });
+
+  $('#todo-items-active li.todo-list-item')
+    .sort(sortPriority).appendTo('#todo-items-active');
 });
 
 /* global dataConfirmModal */

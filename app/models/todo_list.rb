@@ -49,4 +49,12 @@ class TodoList < ActiveRecord::Base
       'progress-bar-info progress-bar-striped active'
     end
   end
+
+  def default_due_at
+    if default_due_at_duration
+      default_due_at_duration.seconds.from_now
+    else
+      7.days.from_now
+    end
+  end
 end

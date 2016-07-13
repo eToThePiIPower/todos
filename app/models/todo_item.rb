@@ -68,7 +68,7 @@ class TodoItem < ActiveRecord::Base
     if complete?
       "1:#{Time.current - completed_at}"
     elsif due_at.nil?
-      "0:#{7.days.from_now.in_time_zone('UTC').iso8601}"
+      "0:#{todo_list.default_due_at.in_time_zone('UTC').iso8601}"
     else
       "0:#{due_at.in_time_zone('UTC').iso8601}"
     end
