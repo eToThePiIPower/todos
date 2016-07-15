@@ -31,7 +31,7 @@ li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
           remote: true,
           id: "todo-item-toggle-#{item.id}",
           method: :delete,
-          class: 'btn btn-xs btn-link' do
+          class: 'btn btn-md btn-link' do
         i.fa.fa-lg.fa-check-square-o[aria-hidden='true']
         span.sr-only Uncomplete this item
     - else
@@ -39,7 +39,7 @@ li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
           remote: true,
           id: "todo-item-toggle-#{item.id}",
           method: :put,
-          class: 'btn btn-xs btn-link' do
+          class: 'btn btn-md btn-link' do
         i.fa.fa-lg.fa-square-o[aria-hidden='true']
         span.sr-only Complete this item
 

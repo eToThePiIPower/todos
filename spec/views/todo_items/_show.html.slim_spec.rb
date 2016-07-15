@@ -15,8 +15,8 @@ RSpec.describe 'todo_items/_show.html.slim' do
 
       render 'todo_items/show', item: @todo_item
 
-      expect(rendered).not_to have_css("a.btn-xs[href='complete link']", text: 'Complete this item')
-      expect(rendered).to have_css("a.btn-xs[href='uncomplete link']", text: 'Uncomplete this item')
+      expect(rendered).not_to have_css("a.btn[href='complete link']", text: 'Complete this item')
+      expect(rendered).to have_css("a.btn[href='uncomplete link']", text: 'Uncomplete this item')
       expect(rendered).to have_css("time.timeago[datetime='#{@completed_at.iso8601}']")
     end
   end
@@ -29,8 +29,8 @@ RSpec.describe 'todo_items/_show.html.slim' do
 
       render 'todo_items/show', item: @todo_item
 
-      expect(rendered).to have_css("a.btn-xs[href='complete link']", text: 'Complete this item')
-      expect(rendered).not_to have_css("a.btn-xs[href='uncomplete link']", text: 'Uncomplete this item')
+      expect(rendered).to have_css("a.btn[href='complete link']", text: 'Complete this item')
+      expect(rendered).not_to have_css("a.btn[href='uncomplete link']", text: 'Uncomplete this item')
       expect(rendered).to have_content 'born yesterday'
       expect(rendered).to have_content 'due last week'
     end

@@ -39,7 +39,7 @@
 }
 
 .todo-list-item {
-  padding-left: 32px;
+  padding-left: 50px;
 
   .todo-item-edit-button {
     margin-left: .5em;
@@ -99,5 +99,10 @@
     margin: 10.5px 0;
     font-size: 12px;
     font-weight: 500;
+  }
+
+  ul,
+  ol {
+    padding-left: 20px;
   }
 }

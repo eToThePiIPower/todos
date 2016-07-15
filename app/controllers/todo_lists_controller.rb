@@ -67,6 +67,8 @@ class TodoListsController < ApplicationController
 
   def convert_durations
     default_due_at_duration_unparsed = params[:todo_list][:default_due_at_duration]
-    params[:todo_list][:default_due_at_duration] = ChronicDuration.parse(default_due_at_duration_unparsed) if default_due_at_duration_unparsed
+    if default_due_at_duration_unparsed
+      params[:todo_list][:default_due_at_duration] = ChronicDuration.parse(default_due_at_duration_unparsed)
+    end
   end
 end

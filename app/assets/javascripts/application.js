@@ -70,8 +70,17 @@ $(document).ready(function() {
   $.timeago.settings.allowFuture = true;
   bindHandlers();
 
-  $('.slide-up-toggler').click(function() {
+  $('.slide-up-toggler').click(function(e) {
+    e.stopPropagation();
     $('.slide-up-panel').slideToggle("slow");
+  });
+
+  $('.slide-up-panel').click(function(e) {
+    e.stopPropagation();
+  });
+
+  $(window).click(function() {
+    $('.slide-up-panel').slideUp("slow");
   });
 
   $('#todo-items-active li.todo-list-item')
