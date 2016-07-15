@@ -10,6 +10,11 @@
       background-color: transparent;
     }
 
+    .active a {
+      border-top: 3px solid;
+      border-radius: 3px 3px 0 0;
+    }
+
     .active.tab-danger a {
       background: $state-danger-bg;
       color: $state-danger-text;

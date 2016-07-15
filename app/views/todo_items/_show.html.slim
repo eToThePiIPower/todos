@@ -15,22 +15,23 @@ li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
       = render 'todo_items/modal_form', item: item
   .list-group-item-text.todo-item-description
     = markdown(item.description)
-  .list-item-times
-    - if item.complete?
-      p.list-group-item-text
-        = item.tag_for_time(:completed)
-    - else
-      p.list-group-item-text
-        = item.tag_for_time(:due)
-      p.list-group-item-text
-        = item.tag_for_time(:created)
+  .list-item-times.flex-list.flex-list-right
+    ul
+      - if item.complete?
+        li.list-group-item-text
+          = item.tag_for_time(:completed)
+      - else
+        li.list-group-item-text
+          = item.tag_for_time(:due)
+        li.list-group-item-text
+          = item.tag_for_time(:created)
   .completion-toggle-box
     - if item.complete?
       = link_to todo_list_uncomplete_path(@todo_list, item),
           remote: true,
           id: "todo-item-toggle-#{item.id}",
           method: :delete,
-          class: 'btn btn-xs btn-link' do
+          class: 'btn btn-md btn-link' do
         i.fa.fa-lg.fa-check-square-o[aria-hidden='true']
         span.sr-only Uncomplete this item
     - else
@@ -38,7 +39,7 @@ li[class=todo_list_item_classes id=item.id data-sortorder=item.sort_order]
           remote: true,
           id: "todo-item-toggle-#{item.id}",
           method: :put,
-          class: 'btn btn-xs btn-link' do
+          class: 'btn btn-md btn-link' do
         i.fa.fa-lg.fa-square-o[aria-hidden='true']
         span.sr-only Complete this item
 

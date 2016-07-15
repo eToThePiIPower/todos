@@ -11,10 +11,6 @@
       a:hover {
         color: $color;
       }
-
-      .todo-item-description {
-        border-bottom: 1px solid mix($color, white, 50%);
-      }
     }
   }
 }
@@ -43,7 +39,7 @@
 }
 
 .todo-list-item {
-  padding-left: 32px;
+  padding-left: 50px;
 
   .todo-item-edit-button {
     margin-left: .5em;
@@ -70,6 +66,10 @@
   }
 }
 
+.list-item-times {
+  @extend .small;
+}
+
 .todo-list-item-complete {
   h4 {
     text-decoration: line-through;
@@ -77,10 +77,6 @@
 }
 
 .todo-item-description {
-  margin-bottom: 10px;
-  padding-bottom: 1em;
-  border-bottom: 1px solid lighten($gray-darker, 50%);
-
   h1 {
     margin: 10.5px 0;
     font-size: 17px;
@@ -103,5 +99,10 @@
     margin: 10.5px 0;
     font-size: 12px;
     font-weight: 500;
+  }
+
+  ul,
+  ol {
+    padding-left: 20px;
   }
 }
