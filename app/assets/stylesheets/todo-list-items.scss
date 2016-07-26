@@ -4,10 +4,9 @@
 @mixin todo-list-item-variant($state, $base, $color) {
   .todo-list-item {
     &.todo-list-item-#{$state} {
-      @extend .list-group-item-#{$base};
       @include reset-modals;
+      border-left: 5px solid $color;
 
-      a,
       a:hover {
         color: $color;
       }
@@ -25,12 +24,10 @@
   }
 }
 
-@include todo-list-item-variant(complete, success, $state-success-text);
-@include todo-list-item-variant(due-now, warning, $state-warning-text);
-@include todo-list-item-variant(overdue, danger, $state-danger-text);
-
-@include list-group-item-variant(muted, $state-success-muted-bg, $state-success-muted-text);
-@include todo-list-item-variant(archived, muted, $state-success-muted-text);
+@include todo-list-item-variant(complete, $state-success-bg, $state-success-text);
+@include todo-list-item-variant(due-now, $state-warning-bg, $state-warning-text);
+@include todo-list-item-variant(overdue, $state-danger-bg, $state-danger-text);
+@include todo-list-item-variant(archived, $state-success-muted-bg, $state-success-muted-text);
 
 .clear-field-link,
 .reset-field-link {
