@@ -1,9 +1,7 @@
-$('#todo-items-active #<%= @todo_item.id %>').remove();
-$('#todo-items-active').append("<%= j render 'todo_items/show', item: @todo_item %>");
+$('#todo-items-active #<%= @todo_item.id %>').before("<%= j render 'todo_items/show', item: @todo_item %>").detach();
 
 $('#alerts').append("<%= j render 'layouts/alert', type: :info, msg: 'Item marked complete' %>");
 $('.progress-bar').attr('style', "width:<%= @todo_list.percent_complete %>%;").attr('aria-valuenow', '<%= @todo_list.percent_complete %>');
-$('#todo-items-active li.todo-list-item').sort(sortPriority).appendTo('#todo-items-active')
 $('.progress-bar')
   .removeClass('progress-bar-danger')
   .removeClass('progress-bar-warning')
